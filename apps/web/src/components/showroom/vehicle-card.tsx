@@ -1,10 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ImageOptimizer } from '@/components/showroom/image-optimizer'
 import type { Vehicle } from '@/types/database'
 
 export interface VehicleCardProps {
@@ -25,11 +25,10 @@ export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
       >
         <div className="relative w-full h-[280px] bg-secondaryBg overflow-hidden">
           {vehicle.image_url ? (
-            <Image
+            <ImageOptimizer
               src={vehicle.image_url}
               alt={`${vehicle.manufacturer_id} ${vehicle.model} ${vehicle.year}`}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               priority
             />

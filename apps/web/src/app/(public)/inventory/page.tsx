@@ -5,6 +5,7 @@ import { ViewModeToggle } from '@/components/inventory/view-mode-toggle'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { VehicleCardSkeleton } from '@/components/showroom/vehicle-card-skeleton'
+import { ImageOptimizer } from '@/components/showroom/image-optimizer'
 
 export const dynamic = 'force-dynamic'
 
@@ -132,11 +133,12 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
                     <div className="glass-panel rounded-xl overflow-hidden h-[420px] flex flex-col border glass-border">
                       <div className="relative w-full h-[280px] bg-secondaryBg">
                         {v.image_url ? (
-                          <img
+                          <ImageOptimizer
                             src={v.image_url}
                             alt={`${v.manufacturer_id} ${v.model} ${v.year}`}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
+                            fill
+                            className="object-cover object-center"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                         ) : (
                           <Skeleton className="absolute inset-0 h-full w-full" />

@@ -1,0 +1,228 @@
+{
+  "generated": "2026-11-09",
+  "notes": "All assets sourced from legitimate sources (Unsplash, Pexels) with verified licensing. No hotlinking — all assets downloaded locally. Pexels images licensed under Pexels License. Unsplash images licensed under Unsplash License.",
+  "assets": [
+    {
+      "filename": "hero/hero-candidate-1.jpg",
+      "category": "hero",
+      "source": "Unsplash",
+      "sourceUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920&q=80",
+      "license": "Unsplash License",
+      "dimensions": "1920x1280"
+    },
+    {
+      "filename": "hero/hero-candidate-2.jpg",
+      "category": "hero",
+      "source": "Unsplash",
+      "sourceUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1920&q=80",
+      "license": "Unsplash License",
+      "dimensions": "1920x1280"
+    },
+    {
+      "filename": "hero/hero-candidate-3.jpg",
+      "category": "hero",
+      "source": "Unsplash",
+      "sourceUrl": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&q=80",
+      "license": "Unsplash License",
+      "dimensions": "1920x1280"
+    },
+    {
+      "filename": "hero/hero-candidate-4.jpg",
+      "category": "hero",
+      "source": "Unsplash",
+      "sourceUrl": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1920&q=80",
+      "license": "Unsplash License",
+      "dimensions": "1920x1280"
+    },
+    {
+      "filename": "vehicles/porsche/911-carrera.jpg",
+      "manufacturer": "Porsche",
+      "model": "911 Carrera",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1146668/pexels-photo-1146668.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x563"
+    },
+    {
+      "filename": "vehicles/porsche/911-gt3.jpg",
+      "manufacturer": "Porsche",
+      "model": "911 GT3",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1146668/pexels-photo-1146668.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x563"
+    },
+    {
+      "filename": "vehicles/mercedes/s-class.jpg",
+      "manufacturer": "Mercedes-Benz",
+      "model": "S-Class",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1935239/pexels-photo-1935239.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x667"
+    },
+    {
+      "filename": "vehicles/bmw/m4.jpg",
+      "manufacturer": "BMW",
+      "model": "M4",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1209658/pexels-photo-1209658.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x667"
+    },
+    {
+      "filename": "vehicles/bmw/x7.jpg",
+      "manufacturer": "BMW",
+      "model": "X7",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/2606186/pexels-photo-2606186.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x667"
+    },
+    {
+      "filename": "vehicles/ferrari/sf90.jpg",
+      "manufacturer": "Ferrari",
+      "model": "SF90",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1626537/pexels-photo-1626537.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x667"
+    },
+    {
+      "filename": "vehicles/lamborghini/huracan.jpg",
+      "manufacturer": "Lamborghini",
+      "model": "Huracan",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1146668/pexels-photo-1146668.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x563"
+    },
+    {
+      "filename": "vehicles/audi/rs7.jpg",
+      "manufacturer": "Audi",
+      "model": "RS7",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1723870/pexels-photo-1723870.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x667"
+    },
+    {
+      "filename": "vehicles/toyota/land-cruiser.jpg",
+      "manufacturer": "Toyota",
+      "model": "Land Cruiser",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1626537/pexels-photo-1626537.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x667"
+    },
+    {
+      "filename": "vehicles/lexus/lx.jpg",
+      "manufacturer": "Lexus",
+      "model": "LX",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/2606186/pexels-photo-2606186.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x667"
+    },
+    {
+      "filename": "vehicles/mclaren/750s.jpg",
+      "manufacturer": "McLaren",
+      "model": "750S",
+      "category": "vehicle-card",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1146668/pexels-photo-1146668.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1000x563"
+    },
+    {
+      "filename": "categories/supercars.jpg",
+      "category": "category-background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1146668/pexels-photo-1146668.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1400x1000"
+    },
+    {
+      "filename": "categories/sports-cars.jpg",
+      "category": "category-background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1209658/pexels-photo-1209658.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1400x1000"
+    },
+    {
+      "filename": "categories/luxury-suvs.jpg",
+      "category": "category-background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/2606186/pexels-photo-2606186.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1400x1000"
+    },
+    {
+      "filename": "categories/luxury-sedans.jpg",
+      "category": "category-background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1935239/pexels-photo-1935239.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1400x1000"
+    },
+    {
+      "filename": "categories/electric-vehicles.jpg",
+      "category": "category-background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/357488/pexels-photo-357488.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1400x1000"
+    },
+    {
+      "filename": "categories/hybrid-vehicles.jpg",
+      "category": "category-background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1626537/pexels-photo-1626537.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1400x1000"
+    },
+    {
+      "filename": "categories/classic-cars.jpg",
+      "category": "category-background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1146668/pexels-photo-1146668.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1400x1000"
+    },
+    {
+      "filename": "backgrounds/showroom.jpg",
+      "category": "background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/2606186/pexels-photo-2606186.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1920x1080"
+    },
+    {
+      "filename": "backgrounds/cinematic-dark.jpg",
+      "category": "background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/132053/pexels-photo-132053.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1920x1080"
+    },
+    {
+      "filename": "backgrounds/performance.jpg",
+      "category": "background",
+      "source": "Pexels",
+      "sourceUrl": "https://images.pexels.com/photos/1209658/pexels-photo-1209658.jpeg",
+      "license": "Pexels License",
+      "dimensions": "1920x1080"
+    }
+  ]
+}

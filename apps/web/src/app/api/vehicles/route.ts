@@ -64,8 +64,28 @@ export async function GET(request: Request) {
     [...params, limit, offset],
   )
 
+  // Fetch primary images for all vehicles
+  const vehicleIds = vehicles.rows.map((v: any) => String(v.id))
+  let primaryImages: Record<string, string> = Object.create(null)
+  if (vehicleIds.length > 0) {
+    const placeholders = vehicleIds.map(() => '?').join(',')
+    const images = await db.query<{ vehicle_id: string; url: string }>(
+      `SELECT vehicle_id, url FROM vehicle_images WHERE vehicle_id IN (${placeholders}) AND is_primary = 1`,
+      vehicleIds,
+    )
+    primaryImages = images.rows.reduce((acc: Record<string, string>, row: { vehicle_id: string; url: string }) => {
+      acc[row.vehicle_id] = row.url
+      return acc
+    }, Object.create(null))
+  }
+
+  const vehiclesWithImages = vehicles.rows.map((v: any) => ({
+    ...v,
+    image_url: primaryImages[String(v.id)] || undefined,
+  }))
+
   return NextResponse.json({
-    vehicles: vehicles.rows,
+    vehicles: vehiclesWithImages,
     total,
     page,
     limit,

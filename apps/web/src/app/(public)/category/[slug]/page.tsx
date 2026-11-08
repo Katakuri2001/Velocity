@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 import { GlassPanel } from '@/components/ui/glass-panel'
@@ -73,7 +74,15 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
       {/* Category hero */}
-      <div className="relative h-[400px] bg-secondaryBg rounded-xl overflow-hidden mb-8">
+      <div className="relative h-[400px] rounded-xl overflow-hidden mb-8">
+        <Image
+          src={`/images/categories/${category.slug}.jpg`}
+          alt={category.name}
+          fill
+          sizes="(max-width: 768px) 100vw, 75vw"
+          className="object-cover object-center"
+          priority
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
         <div className="relative z-10 p-8">
           <span className="text-xs font-manrope text-accent-champagne uppercase tracking-wider mb-2 block">

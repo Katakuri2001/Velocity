@@ -1,14 +1,14 @@
 'use client'
 
+import Image from 'next/image'
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
 import type { Vehicle } from '@/types/database'
 
 export interface VehicleCardProps {
-  vehicle: Vehicle
+  vehicle: Vehicle & { image_url?: string }
   showActions?: boolean
 }
 
@@ -24,10 +24,20 @@ export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
         className="block h-[420px] glass-panel rounded-xl overflow-hidden border glass-border transition-all duration-300 group-hover:border-white/30"
       >
         <div className="relative w-full h-[280px] bg-secondaryBg overflow-hidden">
-          {/* Vehicle image placeholder - real images from detail API */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-white/10 to-white/5">
-            <Skeleton className="absolute inset-0 h-full w-full" />
-          </div>
+          {vehicle.image_url ? (
+            <Image
+              src={vehicle.image_url}
+              alt={`${vehicle.manufacturer_id} ${vehicle.model} ${vehicle.year}`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              priority
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-white/10 to-white/5">
+              <div className="absolute inset-0 animate-pulse bg-white/5" />
+            </div>
+          )}
           <div className="absolute top-4 right-4 glass-panel rounded-lg px-2 py-1">
             <span className="text-xs font-manrope font-medium text-primaryText">
               {vehicle.year}

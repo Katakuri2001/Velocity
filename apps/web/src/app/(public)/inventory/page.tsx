@@ -1,15 +1,32 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
+import type { Metadata } from 'next'
 import { FilterSidebar } from '@/components/inventory/filter-sidebar'
 import { SortControls } from '@/components/inventory/sort-controls'
 import { ViewModeToggle } from '@/components/inventory/view-mode-toggle'
-
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { VehicleCardSkeleton } from '@/components/showroom/vehicle-card-skeleton'
 
 export const dynamic = 'force-dynamic'
+
+export const metadata: Metadata = {
+  title: 'Vehicle Inventory — Browse Our Collection',
+  description:
+    'Browse our curated collection of luxury vehicles. Filter by manufacturer, category, price, and more. Find your next automobile at Velocity Showroom.',
+  openGraph: {
+    title: 'Vehicle Inventory — Browse Our Collection',
+    description:
+      'Browse our curated collection of luxury vehicles. Filter by manufacturer, category, price, and more.',
+    type: 'website',
+    images: [
+      {
+        url: 'https://velocity.showroom/images/backgrounds/showroom.jpg',
+        width: 1920,
+        height: 1080,
+        alt: 'Luxury automotive showroom',
+      },
+    ],
+  },
+}
 
 type FilterParams = {
   manufacturer?: string
@@ -22,12 +39,44 @@ type FilterParams = {
   limit?: string
 }
 
-export default function InventoryPage({ searchParams }: { searchParams: FilterParams }) {
-  const [manufacturers, setManufacturers] = useState<string[]>([])
-  const [categories, setCategories] = useState<string[]>([])
-  const [vehicles, setVehicles] = useState<any[]>([])
-  const [total, setTotal] = useState(0)
-  const [loading, setLoading] = useState(true)
+interface InventoryPageProps {
+  searchParams: FilterParams
+}
+
+async function getInventoryData(filters: FilterParams) {
+  const manufacturer = filters.manufacturer || ''
+  const category = filters.category || ''
+  const availability = filters.availability || ''
+  const minPrice = filters.minPrice || ''
+  const maxPrice = filters.maxPrice || ''
+  const sort = filters.sort || 'latest'
+  const page = parseInt(filters.page || '1', 10)
+  const limit = parseInt(filters.limit || '12', 10)
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const [manuRes, catRes, vehiclesRes] = await Promise.all([
+    fetch(`${baseUrl}/api/manufacturers`, { cache: 'no-store' }),
+    fetch(`${baseUrl}/api/categories`, { cache: 'no-store' }),
+    fetch(
+      `${baseUrl}/api/vehicles?manufacturer=${encodeURIComponent(manufacturer)}&category=${encodeURIComponent(category)}&availability=${encodeURIComponent(availability)}&minPrice=${encodeURIComponent(minPrice)}&maxPrice=${encodeURIComponent(maxPrice)}&sort=${encodeURIComponent(sort)}&page=${page}&limit=${limit}`,
+      { cache: 'no-store' },
+    ),
+  ])
+
+  const manuData = await manuRes.json()
+  const catData = await catRes.json()
+  const vehData = await vehiclesRes.json()
+
+  return {
+    manufacturers: manuData.manufacturers || [],
+    categories: catData.categories || [],
+    vehicles: vehData.vehicles || [],
+    total: vehData.total || 0,
+  }
+}
+
+export default async function InventoryPage({ searchParams }: InventoryPageProps) {
+  const { manufacturers, categories, vehicles, total } = await getInventoryData(searchParams)
 
   const manufacturer = searchParams.manufacturer || ''
   const category = searchParams.category || ''
@@ -35,51 +84,6 @@ export default function InventoryPage({ searchParams }: { searchParams: FilterPa
   const minPrice = searchParams.minPrice || ''
   const maxPrice = searchParams.maxPrice || ''
   const sort = searchParams.sort || 'latest'
-  const page = parseInt(searchParams.page || '1', 10)
-  const limit = parseInt(searchParams.limit || '12', 10)
-
-  useEffect(() => {
-    let mounted = true
-    const load = async () => {
-      try {
-        const [manuRes, catRes, vehiclesRes] = await Promise.all([
-          fetch('/api/manufacturers'),
-          fetch('/api/categories'),
-          fetch(
-            `/api/vehicles?manufacturer=${encodeURIComponent(manufacturer)}&category=${encodeURIComponent(category)}&availability=${encodeURIComponent(availability)}&minPrice=${encodeURIComponent(minPrice)}&maxPrice=${encodeURIComponent(maxPrice)}&sort=${encodeURIComponent(sort)}&page=${page}&limit=${limit}`,
-          ),
-        ])
-
-        if (mounted) {
-          const manuData = await manuRes.json()
-          const catData = await catRes.json()
-          const vehData = await vehiclesRes.json()
-          setManufacturers(manuData.manufacturers || [])
-          setCategories(catData.categories || [])
-          setVehicles(vehData.vehicles || [])
-          setTotal(vehData.total || 0)
-          setLoading(false)
-        }
-      } catch {
-        if (mounted) setLoading(false)
-      }
-    }
-    load()
-    return () => { mounted = false }
-  }, [manufacturer, category, availability, minPrice, maxPrice, sort, page, limit])
-
-  if (loading) {
-    return (
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <h1 className="font-display text-4xl font-bold text-primaryText mb-8">Inventory</h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <VehicleCardSkeleton key={i} />
-          ))}
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -127,7 +131,16 @@ export default function InventoryPage({ searchParams }: { searchParams: FilterPa
                   <div key={v.id}>
                     <div className="glass-panel rounded-xl overflow-hidden h-[420px] flex flex-col border glass-border">
                       <div className="relative w-full h-[280px] bg-secondaryBg">
-                        <Skeleton className="absolute inset-0 h-full w-full" />
+                        {v.image_url ? (
+                          <img
+                            src={v.image_url}
+                            alt={`${v.manufacturer_id} ${v.model} ${v.year}`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <Skeleton className="absolute inset-0 h-full w-full" />
+                        )}
                       </div>
                       <div className="p-4 flex flex-col h-[140px]">
                         <h3 className="font-display font-bold text-primaryText">
@@ -149,7 +162,7 @@ export default function InventoryPage({ searchParams }: { searchParams: FilterPa
             )}
           </div>
 
-          {total > limit && (
+          {total > 12 && (
             <div className="mt-6 flex justify-center">
               <Button onClick={() => {}}>Load more</Button>
             </div>

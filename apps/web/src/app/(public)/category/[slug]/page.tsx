@@ -1,79 +1,75 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-
 import { GlassPanel } from '@/components/ui/glass-panel'
 import { Skeleton } from '@/components/ui/skeleton'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/categories`, {
+      cache: 'no-store',
+    })
+    if (res.ok) {
+      const data = await res.json()
+      const category = data.categories?.find((c: any) => c.slug === params.slug)
+      if (category) {
+        return {
+          title: `${category.name} — Velocity Showroom`,
+          description: category.description ||
+            `Explore our collection of ${category.name.toLowerCase()}. Find your next automobile at Velocity Showroom.`,
+          openGraph: {
+            title: `${category.name} — Velocity Showroom`,
+            description: category.description ||
+              `Explore our collection of ${category.name.toLowerCase()}.`,
+            images: [
+              {
+                url: `https://velocity.showroom/images/categories/${category.slug}.jpg`,
+                width: 1400,
+                height: 1000,
+                alt: category.name,
+              },
+            ],
+          },
+        }
+      }
+    }
+  } catch {
+    // Fallback
+  }
+  return {
+    title: 'Category — Velocity Showroom',
+    description: 'Explore our vehicle categories.',
+    openGraph: {
+      title: 'Category — Velocity Showroom',
+    },
+  }
+}
 
 interface CategoryPageProps {
   params: { slug: string }
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const [category, setCategory] = useState<any | null>(null)
-  const [vehicles, setVehicles] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const [catRes, vehRes] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/categories`, { cache: 'no-store' }),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/vehicles?category=${encodeURIComponent(params.slug)}&limit=12`, { cache: 'no-store' }),
+  ])
 
-  useEffect(() => {
-    let mounted = true
-    const load = async () => {
-      try {
-        const [catRes, vehRes] = await Promise.all([
-          fetch('/api/categories'),
-          fetch(`/api/vehicles?category=${encodeURIComponent(params.slug)}&limit=12`),
-        ])
-        if (mounted) {
-          const catData = await catRes.json()
-          const vehData = await vehRes.json()
-          const found = catData.categories?.find((c: any) => c.slug === params.slug)
-          if (!found) {
-            notFound()
-          }
-          setCategory(found)
-          setVehicles(vehData.vehicles || [])
-          setLoading(false)
-        }
-      } catch {
-        if (mounted) setLoading(false)
-      }
-    }
-    load()
-    return () => { mounted = false }
-  }, [params.slug])
-
-  if (loading) {
-    return (
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="lg:w-72">
-            <Skeleton className="h-64 w-full rounded-xl bg-secondaryBg" />
-          </div>
-          <div className="flex-grow">
-            <Skeleton className="h-10 w-1/3 mb-4" />
-            <Skeleton className="h-6 w-1/2 mb-6" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Skeleton key={i} className="h-[420px] w-full" />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  const catData = await catRes.json()
+  const vehData = await vehRes.json()
+  const category = catData.categories?.find((c: any) => c.slug === params.slug)
 
   if (!category) {
-    return notFound()
+    notFound()
   }
+
+  const vehicles = vehData.vehicles || []
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
-      {/* Category hero */}
       <div className="relative h-[400px] rounded-xl overflow-hidden mb-8">
         <Image
           src={`/images/categories/${category.slug}.jpg`}
@@ -119,11 +115,20 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                 </p>
               </div>
             ) : (
-              vehicles.map((v: any) => (
-                <div key={v.id}>
-                  <div className="glass-panel rounded-xl overflow-hidden h-[420px] flex flex-col border glass-border">
+              <>
+                {vehicles.map((v: any) => (
+                  <div key={v.id} className="glass-panel rounded-xl overflow-hidden h-[420px] flex flex-col border glass-border">
                     <div className="relative w-full h-[280px] bg-secondaryBg">
-                      <Skeleton className="absolute inset-0 h-full w-full" />
+                      {v.image_url ? (
+                        <img
+                          src={v.image_url}
+                          alt={`${v.manufacturer_id} ${v.model} ${v.year}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <Skeleton className="absolute inset-0 h-full w-full" />
+                      )}
                     </div>
                     <div className="p-4 flex flex-col h-[140px]">
                       <h3 className="font-display font-bold text-primaryText">
@@ -139,8 +144,8 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                       </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))}
+              </>
             )}
           </div>
         </div>

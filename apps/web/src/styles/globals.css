@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary-bg: #08090B;
+    --color-secondary-bg: #101216;
+    --color-elevated-surface: rgba(255, 255, 255, 0.055);
+    --color-glass-border: rgba(255, 255, 255, 0.12);
+    --color-primary-text: #F5F5F5;
+    --color-secondary-text: #A3A6AC;
+    --color-accent-champagne: #C5B39E;
+    --color-accent-electric-blue: #3B82F6;
+
+    --font-inter: 'Inter', system-ui, sans-serif;
+    --font-manrope: 'Manrope', system-ui, sans-serif;
+    --font-space-grotesk: 'Space Grotesk', system-ui, monospace;
+    --font-display: 'Space Grotesk', system-ui, serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-primary-bg);
+    color: var(--color-primary-text);
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: var(--color-elevated-surface);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-border {
+    border: 1px solid var(--color-glass-border);
+  }
+
+  .text-primary {
+    color: var(--color-primary-text);
+  }
+
+  .text-secondary {
+    color: var(--color-secondary-text);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary-bg);
+  }
+
+  .bg-secondary {
+    background-color: var(--color-secondary-bg);
+  }
+
+  .accent-electric-blue {
+    color: var(--color-accent-electric-blue);
+  }
+
+  .accent-champagne {
+    color: var(--color-accent-champagne);
+  }
+}

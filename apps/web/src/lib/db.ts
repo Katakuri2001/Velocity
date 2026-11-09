@@ -78,26 +78,79 @@ class InMemoryDatabase implements DatabaseAdapter {
     const rows = Array.from(this.table(tableName).values()) as unknown[]
 
     // Simple WHERE col = ? or col = literal or col IN (?, ?) support
+    // Supports multiple conditions joined by AND
     const whereMatch = sql.match(/WHERE\s+(.+)/i)
     let filtered = rows
     if (whereMatch) {
       const whereClause = whereMatch[1]
+      const conditions = whereClause.split(/\s+AND\s+/i)
 
-      // Match: col = ?  OR  col = 'literal'  OR  col = 123
-      const eqMatch = whereClause.match(/(\w+)\s*=\s*(?:'([^']*)'|(\d+)|(?:\?))/)
-      if (eqMatch) {
-        const col = eqMatch[1]
-        const val = eqMatch[2] !== undefined ? eqMatch[2] : eqMatch[3] !== undefined ? Number(eqMatch[3]) : params[0]
-        filtered = rows.filter((r: any) => r[col] === val)
-      }
+      for (const condition of conditions) {
+        const trimmed = condition.trim()
 
-      // Match: col IN (?, ?)
-      const inMatch = whereClause.match(/(\w+)\s+IN\s*\(([^)]+)\)/i)
-      if (inMatch) {
-        const col = inMatch[1]
-        const vals = inMatch[2].split(',').map((v) => v.trim().replace(/^'|'$/g, ''))
-        filtered = rows.filter((r: any) => vals.includes(String(r[col])))
+        // Match: col = ?  OR  col = 'literal'  OR  col = 123
+        const eqMatch = trimmed.match(/(\w+)\s*=\s*(?:'([^']*)'|(\d+)|(?:\?))/)
+        if (eqMatch) {
+          const col = eqMatch[1]
+          const val = eqMatch[2] !== undefined ? eqMatch[2] : eqMatch[3] !== undefined ? Number(eqMatch[3]) : (params[0] as any)
+          filtered = filtered.filter((r: any) => r[col] === val)
+          continue
+        }
+
+        // Match: col IN (?, ?)
+        const inMatch = trimmed.match(/(\w+)\s+IN\s*\(([^)]+)\)/i)
+        if (inMatch) {
+          const col = inMatch[1]
+          const vals = inMatch[2].split(',').map((v) => v.trim().replace(/^'|'$/g, ''))
+          filtered = filtered.filter((r: any) => vals.includes(String(r[col])))
+          continue
+        }
+
+        // Match: col > ? or col >= ? or col < ? or col <= ?
+        const rangeMatch = trimmed.match(/(\w+)\s*(>=|<=|>|<)\s*(?:'([^']*)'|(\d+)|(?:\?))/)
+        if (rangeMatch) {
+          const col = rangeMatch[1]
+          const op = rangeMatch[2]
+          const val = rangeMatch[3] !== undefined ? rangeMatch[3] : rangeMatch[4] !== undefined ? Number(rangeMatch[4]) : (params[0] as any)
+          const numVal = typeof val === 'string' ? Number(val) : (val as number)
+          filtered = filtered.filter((r: any) => {
+            const rv = r[col]
+            const numRv = typeof rv === 'string' ? Number(rv) : rv
+            switch (op) {
+              case '>=': return numRv >= numVal
+              case '<=': return numRv <= numVal
+              case '>': return numRv > numVal
+              case '<': return numRv < numVal
+              default: return true
+            }
+          })
+          continue
+        }
       }
+    }
+
+    // Apply ORDER BY
+    const orderMatch = sql.match(/ORDER\s+BY\s+(\w+)\s+(ASC|DESC)/i)
+    if (orderMatch) {
+      const col = orderMatch[1]
+      const dir = orderMatch[2].toUpperCase()
+      filtered.sort((a: any, b: any) => {
+        const av = a[col]
+        const bv = b[col]
+        if (av === bv) return 0
+        if (av == null) return dir === 'ASC' ? 1 : -1
+        if (bv == null) return dir === 'ASC' ? -1 : 1
+        return dir === 'ASC' ? (av < bv ? -1 : 1) : (av > bv ? -1 : 1)
+      })
+    }
+
+    // Apply LIMIT and OFFSET
+    const limitMatch = sql.match(/LIMIT\s+(\d+)/i)
+    const offsetMatch = sql.match(/OFFSET\s+(\d+)/i)
+    if (limitMatch) {
+      const limit = parseInt(limitMatch[1], 10)
+      const offset = offsetMatch ? parseInt(offsetMatch[1], 10) : 0
+      filtered = filtered.slice(offset, offset + limit)
     }
 
     return { rows: filtered as T[], rowCount: filtered.length }

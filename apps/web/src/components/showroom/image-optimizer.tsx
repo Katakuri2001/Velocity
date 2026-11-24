@@ -11,6 +11,7 @@ interface ImageOptimizerProps extends Omit<ImageProps, 'width' | 'height'> {
   className?: string
   placeholder?: 'blur' | 'empty'
   sizes?: string
+  fit?: 'cover' | 'contain'
 }
 
 export function ImageOptimizer({
@@ -20,6 +21,7 @@ export function ImageOptimizer({
   className = '',
   placeholder = 'empty',
   sizes,
+  fit = 'cover',
   ...props
 }: ImageOptimizerProps) {
   return (
@@ -29,7 +31,7 @@ export function ImageOptimizer({
       priority={priority}
       placeholder={placeholder}
       sizes={sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
-      className={`object-cover object-center ${className}`}
+      className={`${fit === 'contain' ? 'object-contain' : 'object-cover'} object-center ${className}`}
       {...props}
     />
   )

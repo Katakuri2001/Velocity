@@ -40,3 +40,10 @@ apps/web/data/*.db-journal
 # Misc
 *.tsbuildinfo
 coverage/
+
+# Cloudflare local state and seed staging
+.wrangler/
+scripts/staging/
+
+# Browser artifacts
+.playwright-mcp/

@@ -29,7 +29,8 @@ export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
               src={vehicle.image_url}
               alt={`${vehicle.manufacturer_id} ${vehicle.model} ${vehicle.year}`}
               fill
-              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              className="group-hover:scale-105 transition-transform duration-500"
+              fit="contain"
               priority
             />
           ) : (

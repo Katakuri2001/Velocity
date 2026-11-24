@@ -124,7 +124,7 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
                 <p className="text-secondaryText font-manrope text-lg">
                   No vehicles found matching your criteria.
                 </p>
-                <Button onClick={() => {}}>Clear all filters</Button>
+                <Button>Clear all filters</Button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -166,7 +166,7 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
 
           {total > 12 && (
             <div className="mt-6 flex justify-center">
-              <Button onClick={() => {}}>Load more</Button>
+              <Button>Load more</Button>
             </div>
           )}
         </main>

@@ -14,16 +14,16 @@ export default function NotFound() {
         The vehicle you're looking for may have been sold or is no longer available.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button size="lg" className="w-full sm:w-auto" onClick={() => {}}>
-          <Link href="/inventory" className="flex items-center justify-center w-full h-full">
+        <Link href="/inventory" className="w-full sm:w-auto">
+          <Button size="lg" className="w-full sm:w-auto">
             Browse all vehicles
-          </Link>
-        </Button>
-        <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => {}}>
-          <Link href="/" className="flex items-center justify-center w-full h-full">
+          </Button>
+        </Link>
+        <Link href="/" className="w-full sm:w-auto">
+          <Button variant="outline" size="lg" className="w-full sm:w-auto">
             Return to homepage
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
     </div>
   )

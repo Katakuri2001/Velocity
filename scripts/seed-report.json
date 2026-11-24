@@ -1,0 +1,737 @@
+{
+  "generatedAt": "2026-11-24T06:53:35.743Z",
+  "gate": 1,
+  "priceRule": "a-msrp",
+  "freePlanOnly": true,
+  "carApiCalls": 46,
+  "rows": [
+    {
+      "slug": "porsche-911-carrera",
+      "make": "Porsche",
+      "model": "911 Carrera",
+      "year": 2024,
+      "color": "GT Silver",
+      "category": "Sports Cars",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "911",
+        "modelId": 3587,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020,
+          2019,
+          2018,
+          2017,
+          2016,
+          2015
+        ],
+        "catalogModels": [
+          "718 Boxster",
+          "718 Cayman",
+          "718 Spyder",
+          "911",
+          "918 Spyder",
+          "Boxster",
+          "Cayenne",
+          "Cayman",
+          "Macan",
+          "Panamera",
+          "Taycan"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2020, 2019, 2018, 2017, 2016, 2015)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_aw0eb005gh5jd",
+        "make": "PORSCHE",
+        "model": "911 CARRERA",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "porsche-911-gt3",
+      "make": "Porsche",
+      "model": "911 GT3",
+      "year": 2024,
+      "color": "White",
+      "category": "Sports Cars",
+      "featured": 1,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "911",
+        "modelId": 3587,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020,
+          2019,
+          2018,
+          2017,
+          2016,
+          2015
+        ],
+        "catalogModels": [
+          "718 Boxster",
+          "718 Cayman",
+          "718 Spyder",
+          "911",
+          "918 Spyder",
+          "Boxster",
+          "Cayenne",
+          "Cayman",
+          "Macan",
+          "Panamera",
+          "Taycan"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2020, 2019, 2018, 2017, 2016, 2015)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_92qzv25dgwjvj",
+        "make": "PORSCHE",
+        "model": "911 GT3",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "mercedes-s-class",
+      "make": "Mercedes-Benz",
+      "model": "S-Class",
+      "year": 2024,
+      "color": "Black",
+      "category": "Luxury Sedans",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": null,
+        "modelId": null,
+        "engine": null,
+        "body": null,
+        "availableYears": [],
+        "catalogModels": [
+          "A220",
+          "A35 AMG",
+          "AMG GT",
+          "AMG GT 53",
+          "AMG GT 63",
+          "AMG GT 63 S",
+          "AMG GT C",
+          "AMG GT R",
+          "AMG GT R Pro",
+          "AMG GT S",
+          "B Electric Drive",
+          "B250e"
+        ],
+        "error": "NOT FOUND: model name absent from public dataset (closest catalog names: A220, A35 AMG, AMG GT, AMG GT 53, AMG GT 63, AMG GT 63 S, AMG GT C, AMG GT R, AMG GT R Pro, AMG GT S, B Electric Drive, B250e)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_4sbvgd7669efd",
+        "make": "MERCEDES-BENZ",
+        "model": "S-Class",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "bmw-m4",
+      "make": "BMW",
+      "model": "M4",
+      "year": 2024,
+      "color": "Blue",
+      "category": "Sports Cars",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "M4",
+        "modelId": 7066,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020,
+          2019,
+          2018,
+          2017,
+          2016,
+          2015
+        ],
+        "catalogModels": [
+          "228i",
+          "228i xDrive",
+          "228i xDrive Gran Coupe",
+          "230i",
+          "230i xDrive",
+          "320i",
+          "320i xDrive",
+          "328d",
+          "328d xDrive",
+          "328i",
+          "328i GT xDrive",
+          "328i xDrive"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2020, 2019, 2018, 2017, 2016, 2015)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_605qp1vt5w6k5",
+        "make": "BMW",
+        "model": "M4",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "bmw-x7",
+      "make": "BMW",
+      "model": "X7",
+      "year": 2024,
+      "color": "Black",
+      "category": "Luxury SUVs",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "X7",
+        "modelId": 7327,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020,
+          2019
+        ],
+        "catalogModels": [
+          "228i",
+          "228i xDrive",
+          "228i xDrive Gran Coupe",
+          "230i",
+          "230i xDrive",
+          "320i",
+          "320i xDrive",
+          "328d",
+          "328d xDrive",
+          "328i",
+          "328i GT xDrive",
+          "328i xDrive"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2020, 2019)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_7jqcxz1d7sb28",
+        "make": "BMW",
+        "model": "X7",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "ferrari-sf90",
+      "make": "Ferrari",
+      "model": "SF90",
+      "year": 2024,
+      "color": "Red",
+      "category": "Supercars",
+      "featured": 1,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "SF90 Stradale",
+        "modelId": 7405,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020
+        ],
+        "catalogModels": [
+          "458 Italia",
+          "458 Speciale",
+          "458 Spider",
+          "488 GTB",
+          "488 Pista",
+          "488 Pista Spider",
+          "488 Spider",
+          "812 GTS",
+          "812 Superfast",
+          "California T",
+          "F12 Berlinetta",
+          "F12tdf"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2020)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_f6wmx1qzkm0dz",
+        "make": "FERRARI",
+        "model": "SF90",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "lamborghini-huracan",
+      "make": "Lamborghini",
+      "model": "Huracan",
+      "year": 2023,
+      "color": "Yellow",
+      "category": "Supercars",
+      "featured": 1,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "Huracan",
+        "modelId": 7089,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020,
+          2019,
+          2018,
+          2017,
+          2016,
+          2015
+        ],
+        "catalogModels": [
+          "Aventador",
+          "Centenario",
+          "Huracan",
+          "Urus"
+        ],
+        "error": "NOT FOUND: no trims for 2023 (dataset has 2020, 2019, 2018, 2017, 2016, 2015)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_f4tzn7g972rg0",
+        "make": "LAMBORGHINI",
+        "model": "Huracan",
+        "year": 2023,
+        "error": null
+      }
+    },
+    {
+      "slug": "audi-rs7",
+      "make": "Audi",
+      "model": "RS7",
+      "year": 2024,
+      "color": "Grey",
+      "category": "Sports Cars",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "RS7",
+        "modelId": 7000,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2018,
+          2017,
+          2016,
+          2015
+        ],
+        "catalogModels": [
+          "A3",
+          "A3 Quattro",
+          "A3 Sportback e-tron",
+          "A4",
+          "A4 allroad",
+          "A4 Quattro",
+          "A5 Quattro",
+          "A5 Sportback",
+          "A6",
+          "A6 allroad",
+          "A6 Quattro",
+          "A7 Quattro"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2018, 2017, 2016, 2015)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_6gygt2rezxtx1",
+        "make": "AUDI",
+        "model": "RS 7",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "toyota-land-cruiser",
+      "make": "Toyota",
+      "model": "Land Cruiser",
+      "year": 2024,
+      "color": "White",
+      "category": "Luxury SUVs",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "Land Cruiser",
+        "modelId": 3200,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020,
+          2019,
+          2018,
+          2017,
+          2016,
+          2015
+        ],
+        "catalogModels": [
+          "4Runner",
+          "86",
+          "Avalon",
+          "C-HR",
+          "Camry",
+          "Corolla",
+          "Corolla iM",
+          "GR Supra",
+          "Highlander",
+          "Land Cruiser",
+          "Mirai",
+          "Prius"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2020, 2019, 2018, 2017, 2016, 2015)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_cw5ky8pczwz36",
+        "make": "TOYOTA",
+        "model": "Land Cruiser",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "lexus-lx",
+      "make": "Lexus",
+      "model": "LX",
+      "year": 2024,
+      "color": "Black",
+      "category": "Luxury SUVs",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": "LX570",
+        "modelId": 6680,
+        "engine": null,
+        "body": null,
+        "availableYears": [
+          2020,
+          2019,
+          2018,
+          2017,
+          2016,
+          2015
+        ],
+        "catalogModels": [
+          "CT200h",
+          "ES300h",
+          "ES350",
+          "GS F",
+          "GS200t",
+          "GS300",
+          "GS350",
+          "GS450h",
+          "GX460",
+          "IS200t",
+          "IS250",
+          "IS300"
+        ],
+        "error": "NOT FOUND: no trims for 2024 (dataset has 2020, 2019, 2018, 2017, 2016, 2015)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_3zpm0wcrfm6ay",
+        "make": "LEXUS",
+        "model": "LX",
+        "year": 2024,
+        "error": null
+      }
+    },
+    {
+      "slug": "mclaren-750s",
+      "make": "McLaren",
+      "model": "750S",
+      "year": 2024,
+      "color": "Orange",
+      "category": "Supercars",
+      "featured": 0,
+      "priceRule": "a-msrp",
+      "carApi": {
+        "status": "NOT FOUND",
+        "trimFound": null,
+        "trimId": null,
+        "msrp": null,
+        "modelFound": null,
+        "modelId": null,
+        "engine": null,
+        "body": null,
+        "availableYears": [],
+        "catalogModels": [
+          "570GT",
+          "570S",
+          "600LT",
+          "650S",
+          "675LT",
+          "720S",
+          "GT",
+          "P1"
+        ],
+        "error": "NOT FOUND: model name absent from public dataset (closest catalog names: 570GT, 570S, 600LT, 650S, 675LT, 720S, GT, P1)"
+      },
+      "meter": {
+        "status": "FOUND",
+        "vehicleId": "veh_e3fkqneqsnjp6",
+        "make": "MCLAREN",
+        "model": "750S",
+        "year": 2024,
+        "error": null
+      }
+    }
+  ],
+  "gate2": {
+    "verifiedAt": "2026-11-24T07:35:06.149Z",
+    "gate": "width >= 1024, alpha required, native size preserved",
+    "r2PublicUrl": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev",
+    "images": [
+      {
+        "slug": "porsche-911-carrera",
+        "vehicleId": "veh_aw0eb005gh5jd",
+        "format": "png",
+        "width": 1024,
+        "height": 1024,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\porsche-911-carrera\\primary.png",
+        "r2Key": "vehicles/porsche/porsche-911-carrera/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/porsche/porsche-911-carrera/primary.png"
+      },
+      {
+        "slug": "porsche-911-gt3",
+        "vehicleId": "veh_92qzv25dgwjvj",
+        "format": "png",
+        "width": 1024,
+        "height": 1024,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\porsche-911-gt3\\primary.png",
+        "r2Key": "vehicles/porsche/porsche-911-gt3/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/porsche/porsche-911-gt3/primary.png"
+      },
+      {
+        "slug": "mercedes-s-class",
+        "vehicleId": "veh_4sbvgd7669efd",
+        "format": "png",
+        "width": 2560,
+        "height": 1440,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\mercedes-s-class\\primary.png",
+        "r2Key": "vehicles/mercedes-benz/mercedes-s-class/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/mercedes-benz/mercedes-s-class/primary.png"
+      },
+      {
+        "slug": "bmw-m4",
+        "vehicleId": "veh_605qp1vt5w6k5",
+        "format": "png",
+        "width": 2560,
+        "height": 1440,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\bmw-m4\\primary.png",
+        "r2Key": "vehicles/bmw/bmw-m4/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/bmw/bmw-m4/primary.png"
+      },
+      {
+        "slug": "bmw-x7",
+        "vehicleId": "veh_7jqcxz1d7sb28",
+        "format": "png",
+        "width": 1024,
+        "height": 1024,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\bmw-x7\\primary.png",
+        "r2Key": "vehicles/bmw/bmw-x7/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/bmw/bmw-x7/primary.png"
+      },
+      {
+        "slug": "ferrari-sf90",
+        "vehicleId": "veh_f6wmx1qzkm0dz",
+        "format": "png",
+        "width": 1024,
+        "height": 1024,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\ferrari-sf90\\primary.png",
+        "r2Key": "vehicles/ferrari/ferrari-sf90/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/ferrari/ferrari-sf90/primary.png"
+      },
+      {
+        "slug": "lamborghini-huracan",
+        "vehicleId": "veh_f4tzn7g972rg0",
+        "format": "png",
+        "width": 2560,
+        "height": 1440,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\lamborghini-huracan\\primary.png",
+        "r2Key": "vehicles/lamborghini/lamborghini-huracan/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/lamborghini/lamborghini-huracan/primary.png"
+      },
+      {
+        "slug": "audi-rs7",
+        "vehicleId": "veh_6gygt2rezxtx1",
+        "format": "png",
+        "width": 1024,
+        "height": 1024,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\audi-rs7\\primary.png",
+        "r2Key": "vehicles/audi/audi-rs7/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/audi/audi-rs7/primary.png"
+      },
+      {
+        "slug": "toyota-land-cruiser",
+        "vehicleId": "veh_cw5ky8pczwz36",
+        "format": "png",
+        "width": 1024,
+        "height": 1024,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\toyota-land-cruiser\\primary.png",
+        "r2Key": "vehicles/toyota/toyota-land-cruiser/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/toyota/toyota-land-cruiser/primary.png"
+      },
+      {
+        "slug": "lexus-lx",
+        "vehicleId": "veh_3zpm0wcrfm6ay",
+        "format": "png",
+        "width": 2560,
+        "height": 1440,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\lexus-lx\\primary.png",
+        "r2Key": "vehicles/lexus/lexus-lx/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/lexus/lexus-lx/primary.png"
+      },
+      {
+        "slug": "mclaren-750s",
+        "vehicleId": "veh_e3fkqneqsnjp6",
+        "format": "png",
+        "width": 1024,
+        "height": 1024,
+        "alpha": true,
+        "stagingPath": "D:\\Velocity\\scripts\\staging\\mclaren-750s\\primary.png",
+        "r2Key": "vehicles/mclaren/mclaren-750s/primary.png",
+        "r2Url": "https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/mclaren/mclaren-750s/primary.png"
+      }
+    ]
+  },
+  "gate4": {
+    "appliedAt": "2026-11-24T15:33:00.144Z",
+    "status": "partial specs accepted; 3 cars only",
+    "conversions": {
+      "audi-rs7": "600 PS x 0.986 = 592 horsepower; 465 lb-ft not used; torque 800 Nm retained",
+      "toyota-land-cruiser": "465 lb-ft x 1.356 = 630 Nm",
+      "lexus-lx": "130 mph x 1.609 = 209 km/h; 0-60 mph NOT converted to 0-100"
+    },
+    "sources": {
+      "audi-rs7": {
+        "horsepower": 592,
+        "torque": 800,
+        "engine_capacity": "3996 cc",
+        "transmission": "8-speed",
+        "fuel_type": null,
+        "drivetrain": "quattro permanent all-wheel drive",
+        "acceleration": null,
+        "top_speed": null,
+        "source": "https://www.audi.com/en/search?query=RS+7+Sportback+TFSI+%28441+kW%29&order=relevance&filter=on",
+        "raw": {
+          "horsepower": "600 PS (441 kW)",
+          "torque": "800 Nm",
+          "engine": "3996 cc",
+          "transmission": "8-speed",
+          "drivetrain": "quattro permanent all-wheel drive with self-locking centre differential"
+        }
+      },
+      "toyota-land-cruiser": {
+        "horsepower": 326,
+        "torque": 630,
+        "engine_capacity": "2.4-litre turbo-charged",
+        "transmission": "eight-speed automatic",
+        "fuel_type": "i-FORCE MAX hybrid",
+        "drivetrain": "Full-time four-wheel drive",
+        "acceleration": null,
+        "top_speed": null,
+        "source": "https://pressroom.toyota.com/the-evolution-of-a-legend-the-all-new-2024-land-cruiser/",
+        "raw": {
+          "horsepower": "326 hp",
+          "torque": "465 lb-ft",
+          "engine": "2.4-litre turbo-charged",
+          "transmission": "eight-speed automatic",
+          "fuel": "i-FORCE MAX hybrid; EPA 23 MPG combined",
+          "drivetrain": "Full-time four-wheel drive"
+        }
+      },
+      "lexus-lx": {
+        "horsepower": 409,
+        "torque": 650,
+        "engine_capacity": "3445 cm³",
+        "transmission": "AUTOMATIC (AJA0F)",
+        "fuel_type": "Premium required, 95 octane",
+        "drivetrain": null,
+        "acceleration": null,
+        "top_speed": "209 km/h",
+        "source": "https://pressroom.lexus.com/vehicle/2024-lexus-lx/",
+        "raw": {
+          "horsepower": "409 hp",
+          "torque": "650 Nm",
+          "engine": "3445 cm3 (210.23 cu.in.)",
+          "transmission": "AUTOMATIC (AJA0F)",
+          "fuel": "Premium required; 95 or more (octane)",
+          "top_speed": "130 mph",
+          "acceleration": "0-60 mph 6.9 s (not converted)"
+        }
+      }
+    },
+    "nullSlugs": [
+      "porsche-911-carrera",
+      "porsche-911-gt3",
+      "mercedes-s-class",
+      "bmw-m4",
+      "bmw-x7",
+      "ferrari-sf90",
+      "lamborghini-huracan",
+      "mclaren-750s"
+    ]
+  }
+}

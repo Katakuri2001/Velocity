@@ -1,0 +1,11 @@
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/porsche/porsche-911-carrera/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/porsche/porsche-911-gt3/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/mercedes-benz/mercedes-s-class/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/bmw/bmw-m4/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/bmw/bmw-x7/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/ferrari/ferrari-sf90/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/lamborghini/lamborghini-huracan/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/audi/audi-rs7/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/toyota/toyota-land-cruiser/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/lexus/lexus-lx/primary.png
+https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/mclaren/mclaren-750s/primary.png

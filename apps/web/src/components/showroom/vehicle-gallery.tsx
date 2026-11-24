@@ -31,7 +31,7 @@ export function VehicleGallery({ images, vehicle }: VehicleGalleryProps) {
             <img
               src={currentImage.url}
               alt={currentImage.alt || `${vehicle.model} ${vehicle.year}`}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               loading="lazy"
             />
           ) : (
@@ -93,7 +93,7 @@ export function VehicleGallery({ images, vehicle }: VehicleGalleryProps) {
               }`}
             >
               {img.url ? (
-                <img src={img.url} alt={img.alt || 'Thumbnail'} className="h-full w-full object-cover" />
+                <img src={img.url} alt={img.alt || 'Thumbnail'} className="h-full w-full object-contain" />
               ) : (
                 <Skeleton className="h-full w-full" />
               )}

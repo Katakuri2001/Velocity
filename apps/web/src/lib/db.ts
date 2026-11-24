@@ -101,7 +101,8 @@ class InMemoryDatabase implements DatabaseAdapter {
         const inMatch = trimmed.match(/(\w+)\s+IN\s*\(([^)]+)\)/i)
         if (inMatch) {
           const col = inMatch[1]
-          const vals = inMatch[2].split(',').map((v) => v.trim().replace(/^'|'$/g, ''))
+          const rawVals = inMatch[2].split(',').map((v) => v.trim().replace(/^'|'$/g, ''))
+          const vals = rawVals.every((v) => v === '?') ? params.slice(0, rawVals.length).map(String) : rawVals
           filtered = filtered.filter((r: any) => vals.includes(String(r[col])))
           continue
         }
@@ -127,6 +128,13 @@ class InMemoryDatabase implements DatabaseAdapter {
           continue
         }
       }
+    }
+
+    // Support aggregate COUNT(*) used by list endpoints.
+    const countMatch = sql.match(/SELECT\s+COUNT\(\*\)\s+(?:AS\s+)?(\w+)/i)
+    if (countMatch) {
+      const alias = countMatch[1] || 'count'
+      return { rows: [{ [alias]: filtered.length } as T], rowCount: 1 }
     }
 
     // Apply ORDER BY
@@ -247,4 +255,5 @@ class InMemoryDatabase implements DatabaseAdapter {
   }
 }
 
-export const db: DatabaseAdapter = new InMemoryDatabase()
+const globalForDb = globalThis as unknown as { velocityDb?: DatabaseAdapter }
+export const db: DatabaseAdapter = globalForDb.velocityDb ?? (globalForDb.velocityDb = new InMemoryDatabase())

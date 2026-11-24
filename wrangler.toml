@@ -7,14 +7,14 @@
 # [observability]
 # enabled = true
 
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "velocity"
-# database_id = ""
+[[d1_databases]]
+binding = "DB"
+database_name = "velocity"
+database_id = "571e27e9-9d6a-4fc7-8f89-444f3748f786"
 
-# [[r2_buckets]]
-# binding = "IMAGES"
-# bucket_name = "velocity-images"
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "velocity-images"
 
 # [deploy]
 # manifest = "apps/web/.next"

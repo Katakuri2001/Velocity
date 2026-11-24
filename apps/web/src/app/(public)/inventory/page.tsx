@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { FilterSidebar } from '@/components/inventory/filter-sidebar'
 import { SortControls } from '@/components/inventory/sort-controls'
 import { ViewModeToggle } from '@/components/inventory/view-mode-toggle'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Button } from '@/components/ui/button'
 import { VehicleCardSkeleton } from '@/components/showroom/vehicle-card-skeleton'
 import { ImageOptimizer } from '@/components/showroom/image-optimizer'
 
@@ -87,9 +87,9 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
   const sort = searchParams.sort || 'latest'
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <aside className="lg:w-72 flex-shrink-0">
+    <div className="page-container py-10 md:py-14">
+      <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+        <aside className="lg:w-72 lg:flex-shrink-0">
           <FilterSidebar
             manufacturers={manufacturers}
             categories={categories}
@@ -112,7 +112,7 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
               </p>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <ViewModeToggle />
               <SortControls currentSort={sort} />
             </div>
@@ -124,10 +124,15 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
                 <p className="text-secondaryText font-manrope text-lg">
                   No vehicles found matching your criteria.
                 </p>
-                <Button onClick={() => {}}>Clear all filters</Button>
+                <Link
+                  href="/inventory"
+                  className="focus-ring mt-4 inline-flex rounded-xl bg-accentChampagne px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#241a0c] transition-colors hover:bg-[#e8cfa5]"
+                >
+                  Clear all filters
+                </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="card-grid">
                 {vehicles.map((v: any) => (
                   <div key={v.id}>
                     <div className="glass-panel rounded-xl overflow-hidden h-[420px] flex flex-col border glass-border">
@@ -166,7 +171,12 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
 
           {total > 12 && (
             <div className="mt-6 flex justify-center">
-              <Button onClick={() => {}}>Load more</Button>
+              <button
+                type="button"
+                className="focus-ring rounded-xl border border-glassBorder px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primaryText transition-colors hover:bg-white/5"
+              >
+                Load more
+              </button>
             </div>
           )}
         </main>

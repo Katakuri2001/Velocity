@@ -49,7 +49,7 @@ export default function CompareContent() {
 
   if (!isLoaded) {
     return (
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="page-container py-10 md:py-14">
         <h1 className="font-display text-3xl font-bold text-primaryText mb-8">Compare</h1>
         <div className="glass-panel rounded-xl p-12 border glass-border text-center">
           <SkeletonLoader />
@@ -60,15 +60,17 @@ export default function CompareContent() {
 
   if (comparison.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="page-container py-10 md:py-14">
         <h1 className="font-display text-3xl font-bold text-primaryText mb-8">Compare</h1>
-        <ComparisonEmpty />
+        <GlassPanel className="mt-8 rounded-2xl border-glassBorder p-6 md:p-10">
+          <ComparisonEmpty />
+        </GlassPanel>
       </div>
     )
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
+    <div className="page-container py-10 md:py-14">
       <h1 className="font-display text-3xl font-bold text-primaryText mb-8">
         Vehicle Comparison
       </h1>

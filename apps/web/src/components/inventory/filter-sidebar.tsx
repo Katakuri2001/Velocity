@@ -26,6 +26,10 @@ export function FilterSidebar({
 }: FilterSidebarProps) {
   const [expanded, setExpanded] = React.useState(true)
 
+  React.useEffect(() => {
+    if (window.innerWidth < 1024) setExpanded(false)
+  }, [])
+
   const buildUrl = (overrides: Record<string, string>): string => {
     const params = new URLSearchParams()
     if (overrides.manufacturer !== undefined) params.set('manufacturer', overrides.manufacturer)
@@ -46,14 +50,13 @@ export function FilterSidebar({
           variant="ghost"
           size="sm"
           onClick={() => setExpanded(!expanded)}
-          className="text-secondaryText hover:text-primaryText"
+          className="text-secondaryText hover:text-primaryText lg:hidden"
         >
           {expanded ? 'Collapse' : 'Expand'}
         </Button>
       </div>
 
-      {!expanded ? null : (
-        <div className="space-y-6">
+      <div className={`${expanded ? 'block' : 'hidden'} space-y-6 lg:block`}>
           {/* Manufacturer */}
           <div>
             <h3 className="text-xs font-manrope font-semibold text-secondaryText mb-3 uppercase">
@@ -156,8 +159,7 @@ export function FilterSidebar({
           <Button variant="outline" size="sm" className="w-full" onClick={() => {}}>
             Clear all filters
           </Button>
-        </div>
-      )}
+      </div>
     </GlassPanel>
   )
 }

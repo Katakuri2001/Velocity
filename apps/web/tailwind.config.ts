@@ -8,14 +8,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primaryBg: '#08090B',
-        secondaryBg: '#101216',
-        elevatedSurface: 'rgba(255, 255, 255, 0.055)',
-        glassBorder: 'rgba(255, 255, 255, 0.12)',
-        primaryText: '#F5F5F5',
-        secondaryText: '#A3A6AC',
-        accentChampagne: '#C5B39E',
-        accentElectricBlue: '#3B82F6',
+        primaryBg: '#0B0C0E',
+        secondaryBg: '#121315',
+        elevatedSurface: 'rgba(255, 255, 255, 0.04)',
+        glassBorder: 'rgba(216, 185, 138, 0.18)',
+        primaryText: '#ECE9E4',
+        secondaryText: '#A6A39C',
+        accentChampagne: '#D8B98A',
+        accentElectricBlue: '#98BFFF',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
@@ -50,6 +50,12 @@ const config: Config = {
       },
       backdropBlur: {
         xs: '2px',
+      },
+      boxShadow: {
+        pavilion: '0 24px 70px rgba(0, 0, 0, 0.55)',
+      },
+      maxWidth: {
+        shell: '1280px',
       },
     },
   },

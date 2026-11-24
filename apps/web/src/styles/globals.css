@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --color-primary-bg: #08090B;
-    --color-secondary-bg: #101216;
-    --color-elevated-surface: rgba(255, 255, 255, 0.055);
-    --color-glass-border: rgba(255, 255, 255, 0.12);
-    --color-primary-text: #F5F5F5;
-    --color-secondary-text: #A3A6AC;
-    --color-accent-champagne: #C5B39E;
-    --color-accent-electric-blue: #3B82F6;
+    --color-primary-bg: #0B0C0E;
+    --color-secondary-bg: #121315;
+    --color-elevated-surface: rgba(255, 255, 255, 0.04);
+    --color-glass-border: rgba(216, 185, 138, 0.18);
+    --color-primary-text: #ECE9E4;
+    --color-secondary-text: #A6A39C;
+    --color-accent-champagne: #D8B98A;
+    --color-accent-electric-blue: #98BFFF;
 
     --font-inter: 'Inter', system-ui, sans-serif;
     --font-manrope: 'Manrope', system-ui, sans-serif;
@@ -81,5 +81,74 @@
 
   .accent-champagne {
     color: var(--color-accent-champagne);
+  }
+}
+
+@layer utilities {
+  .page-container {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .page-container {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-container {
+      padding-inline: 3rem;
+    }
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .card-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .spotlight-card {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(216, 185, 138, 0.13),
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--color-accent-champagne);
+    outline-offset: 3px;
   }
 }

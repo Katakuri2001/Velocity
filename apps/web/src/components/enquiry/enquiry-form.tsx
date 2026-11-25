@@ -71,8 +71,8 @@ export function EnquiryForm({ vehicleId }: EnquiryFormProps) {
 
   if (submitted) {
     return (
-      <div className="glass-panel rounded-xl p-6 border glass-border text-center">
-        <div className="w-12 h-12 rounded-full bg-accent-electric-blue text-primaryBg flex items-center justify-center mx-auto mb-4">
+      <div className="border border-hairline bg-surface p-6 text-center">
+        <div className="w-12 h-12 border border-gold text-gold flex items-center justify-center mx-auto mb-4">
           <span className="text-2xl">✓</span>
         </div>
         <h3 className="font-display text-xl font-bold text-primaryText mb-2">
@@ -101,7 +101,7 @@ export function EnquiryForm({ vehicleId }: EnquiryFormProps) {
         </label>
         <input
           type="text"
-          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-gold/60"
           value={formData.name}
           onChange={(e) => handleChange('name', e.target.value)}
           placeholder="John Doe"
@@ -114,7 +114,7 @@ export function EnquiryForm({ vehicleId }: EnquiryFormProps) {
           </label>
           <input
             type="tel"
-            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-gold/60"
             value={formData.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
             placeholder="+1 234 567 8900"
@@ -126,7 +126,7 @@ export function EnquiryForm({ vehicleId }: EnquiryFormProps) {
           </label>
           <input
             type="email"
-            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-gold/60"
             value={formData.email}
             onChange={(e) => handleChange('email', e.target.value)}
             placeholder="john@example.com"
@@ -138,7 +138,7 @@ export function EnquiryForm({ vehicleId }: EnquiryFormProps) {
           Preferred contact method
         </label>
         <select
-          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-gold/60"
           value={formData.preferredContact}
           onChange={(e) => handleChange('preferredContact', e.target.value)}
         >
@@ -153,7 +153,7 @@ export function EnquiryForm({ vehicleId }: EnquiryFormProps) {
         </label>
         <textarea
           rows={4}
-          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-gold/60"
           value={formData.message}
           onChange={(e) => handleChange('message', e.target.value)}
           placeholder="Tell us about your interest in this vehicle..."
@@ -173,7 +173,7 @@ export function EnquiryForm({ vehicleId }: EnquiryFormProps) {
       <Button
         type="submit"
         size="lg"
-        className="w-full bg-accent-electric-blue text-primaryBg hover:bg-accent-champagne disabled:opacity-50"
+        className="w-full border border-gold bg-gold text-ink hover:bg-goldHover disabled:opacity-50"
         disabled={submitting}
       >
         {submitting ? 'Sending...' : 'Submit enquiry'}

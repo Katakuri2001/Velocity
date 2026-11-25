@@ -1,29 +1,28 @@
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 
 export default function NotFound() {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-24 text-center">
-      <div className="w-16 h-16 rounded-full bg-secondaryBg flex items-center justify-center mx-auto mb-6">
-        <span className="text-3xl">🏎️</span>
-      </div>
-      <h1 className="font-display text-3xl font-bold text-primaryText mb-4">
-        Vehicle not found
+    <div className="page-container section-pad text-center">
+      <p className="eyebrow">404 — Not found</p>
+      <h1 className="mt-6 font-display text-4xl font-normal tracking-[-0.03em] text-primary sm:text-5xl">
+        This vehicle is no longer on display.
       </h1>
-      <p className="text-secondaryText font-manrope mb-8 max-w-md mx-auto">
-        The vehicle you're looking for may have been sold or is no longer available.
+      <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted">
+        It may have been sold or is no longer available. The rest of the collection awaits.
       </p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Button size="lg" className="w-full sm:w-auto" onClick={() => {}}>
-          <Link href="/inventory" className="flex items-center justify-center w-full h-full">
-            Browse all vehicles
-          </Link>
-        </Button>
-        <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => {}}>
-          <Link href="/" className="flex items-center justify-center w-full h-full">
-            Return to homepage
-          </Link>
-        </Button>
+      <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <Link
+          href="/inventory"
+          className="focus-ring inline-flex border border-gold px-7 py-3 text-[11px] uppercase tracking-[0.2em] text-gold transition-colors duration-300 hover:border-goldHover hover:text-goldHover"
+        >
+          Browse all vehicles
+        </Link>
+        <Link
+          href="/"
+          className="focus-ring inline-flex border border-hairline px-7 py-3 text-[11px] uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:border-gold/60 hover:text-gold"
+        >
+          Return to homepage
+        </Link>
       </div>
     </div>
   )

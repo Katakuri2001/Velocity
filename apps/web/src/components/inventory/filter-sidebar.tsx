@@ -2,8 +2,6 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { GlassPanel } from '@/components/ui/glass-panel'
 
 interface FilterSidebarProps {
   manufacturers: any[]
@@ -40,126 +38,109 @@ export function FilterSidebar({
     return `/inventory?${params.toString()}`
   }
 
+  const filterLink = (href: string, active: boolean, label: string) => (
+    <Link
+      key={`${href}-${label}`}
+      href={href}
+      className={`focus-ring flex items-center justify-between px-3 py-2 text-sm transition-colors duration-300 ${
+        active ? 'text-gold' : 'text-muted hover:text-primary'
+      }`}
+    >
+      <span>{label}</span>
+      {active && <span className="text-xs text-gold" aria-hidden="true">—</span>}
+    </Link>
+  )
+
   return (
-    <GlassPanel className="rounded-lg p-5 border glass-border">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-manrope font-semibold text-primaryText text-sm uppercase tracking-wider">
-          Filters
-        </h2>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setExpanded(!expanded)}
-          className="text-secondaryText hover:text-primaryText lg:hidden"
+    <div className="border border-hairline bg-ink">
+      <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
+        <h2 className="eyebrow">Filters</h2>
+        <button
+          type="button"
+          onClick={() => setExpanded((value) => !value)}
+          className="focus-ring text-[11px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-primary lg:hidden"
         >
-          {expanded ? 'Collapse' : 'Expand'}
-        </Button>
+          {expanded ? 'Hide' : 'Show'}
+        </button>
       </div>
 
-      <div className={`${expanded ? 'block' : 'hidden'} space-y-6 lg:block`}>
-          {/* Manufacturer */}
+      <div className={`${expanded ? 'block' : 'hidden'} px-5 py-6 lg:block`}>
+        <div className="space-y-8">
           <div>
-            <h3 className="text-xs font-manrope font-semibold text-secondaryText mb-3 uppercase">
-              Manufacturer
-            </h3>
-            <div className="space-y-2">
-              {manufacturers.map((m) => (
-                <Link
-                  key={m.id}
-                  href={buildUrl({ manufacturer: selectedManufacturer === m.id ? '' : m.id })}
-                  className={`flex items-center justify-between px-3 py-2 rounded-md text-sm font-manrope transition-colors ${
-                    selectedManufacturer === m.id
-                      ? 'bg-white/5 text-accent-electric-blue'
-                      : 'text-secondaryText hover:bg-white/5'
-                  }`}
-                >
-                  <span>{m.name}</span>
-                  {selectedManufacturer === m.id && <span className="text-xs">✓</span>}
-                </Link>
-              ))}
+            <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted/70">Manufacturer</h3>
+            <div className="mt-3 space-y-0.5">
+              {manufacturers.map((m) =>
+                filterLink(
+                  buildUrl({ manufacturer: selectedManufacturer === m.id ? '' : m.id }),
+                  selectedManufacturer === m.id,
+                  m.name,
+                ),
+              )}
             </div>
           </div>
 
-          {/* Category */}
           <div>
-            <h3 className="text-xs font-manrope font-semibold text-secondaryText mb-3 uppercase">
-              Category
-            </h3>
-            <div className="space-y-2">
-              {categories.map((c) => (
-                <Link
-                  key={c.id}
-                  href={buildUrl({ category: selectedCategory === c.id ? '' : c.id })}
-                  className={`flex items-center justify-between px-3 py-2 rounded-md text-sm font-manrope transition-colors ${
-                    selectedCategory === c.id
-                      ? 'bg-white/5 text-accent-electric-blue'
-                      : 'text-secondaryText hover:bg-white/5'
-                  }`}
-                >
-                  <span>{c.name}</span>
-                  {selectedCategory === c.id && <span className="text-xs">✓</span>}
-                </Link>
-              ))}
+            <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted/70">Category</h3>
+            <div className="mt-3 space-y-0.5">
+              {categories.map((c) =>
+                filterLink(
+                  buildUrl({ category: selectedCategory === c.id ? '' : c.id }),
+                  selectedCategory === c.id,
+                  c.name,
+                ),
+              )}
             </div>
           </div>
 
-          {/* Condition */}
           <div>
-            <h3 className="text-xs font-manrope font-semibold text-secondaryText mb-3 uppercase">
-              Condition
-            </h3>
-            <div className="space-y-2">
-              {['new', 'used', 'certified'].map((cond) => (
-                <Link
-                  key={cond}
-                  href={buildUrl({ availability: selectedAvailability === cond ? '' : cond })}
-                  className={`flex items-center justify-between px-3 py-2 rounded-md text-sm font-manrope transition-colors ${
-                    selectedAvailability === cond
-                      ? 'bg-white/5 text-accent-electric-blue'
-                      : 'text-secondaryText hover:bg-white/5'
-                  }`}
-                >
-                  <span>{cond.charAt(0).toUpperCase() + cond.slice(1)}</span>
-                  {selectedAvailability === cond && <span className="text-xs">✓</span>}
-                </Link>
-              ))}
+            <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted/70">Condition</h3>
+            <div className="mt-3 space-y-0.5">
+              {['new', 'used', 'certified'].map((cond) =>
+                filterLink(
+                  buildUrl({ availability: selectedAvailability === cond ? '' : cond }),
+                  selectedAvailability === cond,
+                  cond.charAt(0).toUpperCase() + cond.slice(1),
+                ),
+              )}
             </div>
           </div>
 
-          {/* Price range */}
           <div>
-            <h3 className="text-xs font-manrope font-semibold text-secondaryText mb-3 uppercase">
-              Price
-            </h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-1">
-                <label className="text-xs text-secondaryText font-manrope">Min</label>
+            <h3 className="text-[11px] uppercase tracking-[0.2em] text-muted/70">Price</h3>
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="min-price" className="text-xs text-muted">Min</label>
                 <input
+                  id="min-price"
                   type="number"
-                  className="px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+                  className="border border-hairline bg-surface px-3 py-2 text-sm text-primary outline-none transition-colors focus:border-gold/60"
                   value={minPrice}
-                  onChange={(e) => {}}
-                  placeholder="0"
+                  readOnly
+                  placeholder="—"
                 />
               </div>
-              <div className="flex flex-col gap-1">
-                <label className="text-xs text-secondaryText font-manrope">Max</label>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="max-price" className="text-xs text-muted">Max</label>
                 <input
+                  id="max-price"
                   type="number"
-                  className="px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+                  className="border border-hairline bg-surface px-3 py-2 text-sm text-primary outline-none transition-colors focus:border-gold/60"
                   value={maxPrice}
-                  onChange={(e) => {}}
-                  placeholder="0"
+                  readOnly
+                  placeholder="—"
                 />
               </div>
             </div>
           </div>
 
-          {/* Clear all */}
-          <Button variant="outline" size="sm" className="w-full" onClick={() => {}}>
+          <Link
+            href="/inventory"
+            className="focus-ring inline-block border-b border-hairline pb-1 text-[11px] uppercase tracking-[0.2em] text-muted transition-colors duration-300 hover:border-gold hover:text-primary"
+          >
             Clear all filters
-          </Button>
+          </Link>
+        </div>
       </div>
-    </GlassPanel>
+    </div>
   )
 }

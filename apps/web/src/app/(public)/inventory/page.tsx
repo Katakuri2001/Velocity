@@ -2,10 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FilterSidebar } from '@/components/inventory/filter-sidebar'
 import { SortControls } from '@/components/inventory/sort-controls'
-import { ViewModeToggle } from '@/components/inventory/view-mode-toggle'
-import { Skeleton } from '@/components/ui/skeleton'
-import { VehicleCardSkeleton } from '@/components/showroom/vehicle-card-skeleton'
-import { ImageOptimizer } from '@/components/showroom/image-optimizer'
+import { InventoryCollection } from '@/components/inventory/inventory-collection'
 
 export const dynamic = 'force-dynamic'
 
@@ -78,6 +75,13 @@ async function getInventoryData(filters: FilterParams) {
 
 export default async function InventoryPage({ searchParams }: InventoryPageProps) {
   const { manufacturers, categories, vehicles, total } = await getInventoryData(searchParams)
+  const manufacturerNames: Record<string, string> = manufacturers.reduce(
+    (acc: Record<string, string>, m: { id: string; name: string }) => {
+      acc[m.id] = m.name
+      return acc
+    },
+    {},
+  )
 
   const manufacturer = searchParams.manufacturer || ''
   const category = searchParams.category || ''
@@ -87,8 +91,20 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
   const sort = searchParams.sort || 'latest'
 
   return (
-    <div className="page-container py-10 md:py-14">
-      <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+    <div className="page-container section-pad">
+      <header className="border-b border-hairline pb-10">
+        <p className="eyebrow">The collection</p>
+        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <h1 className="font-display text-4xl font-normal leading-tight tracking-[-0.03em] text-primary sm:text-5xl">
+            Inventory
+          </h1>
+          <p className="text-sm text-muted">
+            {total} vehicle{total !== 1 ? 's' : ''} available
+          </p>
+        </div>
+      </header>
+
+      <div className="mt-12 flex flex-col gap-10 lg:flex-row lg:gap-16">
         <aside className="lg:w-72 lg:flex-shrink-0">
           <FilterSidebar
             manufacturers={manufacturers}
@@ -101,83 +117,24 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
           />
         </aside>
 
-        <main className="flex-grow">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <div>
-              <h1 className="font-display text-3xl font-bold text-primaryText">
-                Inventory
-              </h1>
-              <p className="text-secondaryText font-manrope">
-                {total} vehicle{total !== 1 ? 's' : ''} available
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <ViewModeToggle />
-              <SortControls currentSort={sort} />
-            </div>
+        <main className="min-w-0 flex-grow">
+          <div className="mb-8">
+            <SortControls currentSort={sort} />
           </div>
 
-          <div className="glass-panel rounded-xl p-6 border glass-border">
-            {vehicles.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-secondaryText font-manrope text-lg">
-                  No vehicles found matching your criteria.
-                </p>
-                <Link
-                  href="/inventory"
-                  className="focus-ring mt-4 inline-flex rounded-xl bg-accentChampagne px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#241a0c] transition-colors hover:bg-[#e8cfa5]"
-                >
-                  Clear all filters
-                </Link>
-              </div>
-            ) : (
-              <div className="card-grid">
-                {vehicles.map((v: any) => (
-                  <div key={v.id}>
-                    <div className="glass-panel rounded-xl overflow-hidden h-[420px] flex flex-col border glass-border">
-                      <div className="relative w-full h-[280px] bg-secondaryBg">
-                        {v.image_url ? (
-                          <ImageOptimizer
-                            src={v.image_url}
-                            alt={`${v.manufacturer_id} ${v.model} ${v.year}`}
-                            fill
-                            className="object-cover object-center"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                        ) : (
-                          <Skeleton className="absolute inset-0 h-full w-full" />
-                        )}
-                      </div>
-                      <div className="p-4 flex flex-col h-[140px]">
-                        <h3 className="font-display font-bold text-primaryText">
-                          {v.model} {v.variant ? `- ${v.variant}` : ''}
-                        </h3>
-                        <p className="text-sm text-secondaryText font-manrope mt-1">
-                          {v.year} • {v.price.toLocaleString()}
-                        </p>
-                        <div className="mt-auto flex gap-2 text-xs text-secondaryText font-manrope">
-                          <span>{v.transmission || '—'}</span>
-                          <span>•</span>
-                          <span>{v.fuel_type || '—'}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {total > 12 && (
-            <div className="mt-6 flex justify-center">
-              <button
-                type="button"
-                className="focus-ring rounded-xl border border-glassBorder px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primaryText transition-colors hover:bg-white/5"
+          {vehicles.length === 0 ? (
+            <div className="border border-hairline bg-surface px-6 py-20 text-center">
+              <p className="font-display text-2xl text-primary">Nothing matches just yet</p>
+              <p className="mt-3 text-sm text-muted">Try adjusting your filters to see more of the collection.</p>
+              <Link
+                href="/inventory"
+                className="focus-ring mt-8 inline-flex border border-hairline px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:border-gold/60 hover:text-gold"
               >
-                Load more
-              </button>
+                Clear all filters
+              </Link>
             </div>
+          ) : (
+            <InventoryCollection vehicles={vehicles} manufacturerNames={manufacturerNames} />
           )}
         </main>
       </div>

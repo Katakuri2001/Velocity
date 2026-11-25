@@ -10,14 +10,15 @@ interface FadeContentProps {
   y?: number
 }
 
-export function FadeContent({ children, className = '', delay = 0, y = 18 }: FadeContentProps) {
+/** Slow fade + 16px slide-up on scroll. 0.6s ease-out, stagger via delay. */
+export function FadeContent({ children, className = '', delay = 0, y = 16 }: FadeContentProps) {
   return (
     <motion.div
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, delay, ease: 'easeOut' }}
     >
       {children}
     </motion.div>

@@ -1,10 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import { SessionProvider } from '@/components/auth/session-provider'
 import { Shell } from '@/components/layout/shell'
 import '@/styles/globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
+
+/** Free Google Font (SIL Open Font License) — elegant serif for display type. */
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-display',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -63,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <SessionProvider>
       <html lang="en" className="h-full">
-        <body className={`${inter.variable} h-full bg-primaryBg text-primaryText`}>
+        <body className={`${inter.variable} ${playfair.variable} h-full bg-ink text-primary`}>
           <Shell>{children}</Shell>
         </body>
       </html>

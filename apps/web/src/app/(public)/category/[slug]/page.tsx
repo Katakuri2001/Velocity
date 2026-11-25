@@ -52,13 +52,17 @@ interface CategoryPageProps {
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-  const [catRes, vehRes] = await Promise.all([
+  const [catRes, vehRes, manuRes] = await Promise.all([
     fetch(`${baseUrl}/api/categories`, { cache: 'no-store' }),
     fetch(`${baseUrl}/api/vehicles?category=${encodeURIComponent(params.slug)}&limit=12`, { cache: 'no-store' }),
+    fetch(`${baseUrl}/api/manufacturers`, { cache: 'no-store' }),
   ])
 
-  const catData = await catRes.json()
-  const vehData = await vehRes.json()
+  const [catData, vehData, manuData] = await Promise.all([
+    catRes.json(),
+    vehRes.json(),
+    manuRes.json(),
+  ])
   const category = catData.categories?.find((c: any) => c.slug === params.slug)
 
   if (!category) {
@@ -66,6 +70,13 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   const vehicles = vehData.vehicles || []
+  const manufacturerNames: Record<string, string> = (manuData.manufacturers || []).reduce(
+    (acc: Record<string, string>, m: { id: string; name: string }) => {
+      acc[m.id] = m.name
+      return acc
+    },
+    {},
+  )
 
   return (
     <div className="page-container section-pad">
@@ -95,7 +106,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         {vehicles.length === 0 ? (
           <p className="text-sm text-muted">No vehicles in this category yet.</p>
         ) : (
-          vehicles.map((v: any) => <VehicleCard key={v.id} vehicle={v} />)
+          vehicles.map((v: any, index: number) => (
+            <VehicleCard
+              key={v.id}
+              vehicle={v}
+              manufacturerName={manufacturerNames[v.manufacturer_id]}
+              priority={index === 0}
+            />
+          ))
         )}
       </div>
     </div>

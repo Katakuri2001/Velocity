@@ -1,25 +1,23 @@
 'use client'
 
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 
 export function FavoritesEmpty() {
   return (
-    <div className="flex flex-col items-center justify-center text-center py-20">
-      <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6">
-        <span className="text-2xl">♡</span>
+    <div className="flex flex-col items-center justify-center py-10 text-center md:py-20">
+      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-glassBorder bg-white/5 text-2xl text-accentChampagne">
+        ♡
       </div>
-      <h2 className="font-display text-2xl font-bold text-primaryText mb-4">
-        No favorites yet
-      </h2>
-      <p className="text-secondaryText font-manrope mb-8 max-w-md">
+      <h2 className="font-display text-2xl font-bold text-primaryText">No favorites yet</h2>
+      <p className="mt-4 max-w-md font-manrope text-secondaryText">
         Save vehicles you love by clicking the heart icon on any vehicle card.
       </p>
-      <Button size="lg" onClick={() => {}}>
-        <Link href="/inventory" className="flex items-center justify-center w-full h-full">
-          Browse inventory
-        </Link>
-      </Button>
+      <Link
+        href="/inventory"
+        className="focus-ring mt-8 inline-flex rounded-xl bg-accentChampagne px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#241a0c] transition-colors hover:bg-[#e8cfa5]"
+      >
+        Browse inventory
+      </Link>
     </div>
   )
 }

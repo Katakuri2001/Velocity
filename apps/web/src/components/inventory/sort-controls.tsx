@@ -25,8 +25,8 @@ export function SortControls({ currentSort }: SortControlsProps) {
   }
 
   return (
-    <GlassPanel className="rounded-lg px-4 py-3 border glass-border">
-      <span className="text-xs font-manrope font-semibold text-secondaryText uppercase mr-3">
+    <GlassPanel className="min-w-0 flex-1 rounded-lg border border-glassBorder px-4 py-3">
+      <span className="mr-3 text-xs font-manrope font-semibold uppercase text-[#e4e4e7]">
         Sort by:
       </span>
       <div className="flex gap-2 overflow-x-auto pb-1">
@@ -34,10 +34,11 @@ export function SortControls({ currentSort }: SortControlsProps) {
           <Link
             key={opt.value}
             href={buildUrl(opt.value)}
-            className={`px-3 py-1.5 rounded-md text-xs font-manrope transition-colors whitespace-nowrap ${
+            aria-current={currentSort === opt.value ? 'page' : undefined}
+            className={`rounded-md px-3 py-1.5 text-xs font-manrope transition-colors whitespace-nowrap ${
               currentSort === opt.value
-                ? 'bg-accent-electric-blue text-primaryBg'
-                : 'text-secondaryText hover:text-primaryText hover:bg-white/5'
+                ? 'bg-[#ffffff] font-semibold text-[#111111]'
+                : 'text-[#d4d4d8] hover:bg-white/5 hover:text-[#ffffff]'
             }`}
           >
             {opt.label}

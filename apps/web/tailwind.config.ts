@@ -1,5 +1,9 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * Velocity design tokens — high-end premium.
+ * Dark cinematic surfaces, champagne gold accents, serif display type.
+ */
 const config: Config = {
   darkMode: 'class',
   content: [
@@ -8,27 +12,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primaryBg: '#0B0C0E',
-        secondaryBg: '#121315',
-        elevatedSurface: 'rgba(255, 255, 255, 0.04)',
-        glassBorder: 'rgba(216, 185, 138, 0.18)',
-        primaryText: '#ECE9E4',
-        secondaryText: '#A6A39C',
-        accentChampagne: '#D8B98A',
-        accentElectricBlue: '#98BFFF',
+        // Core palette (source of truth)
+        ink: '#050505',
+        surface: '#0a0a0a',
+        surfaceRaised: '#111111',
+        card: '#141414',
+        hairline: '#262626',
+        primary: '#f5f5f4',
+        muted: '#a1a1aa',
+        gold: '#c9a86a',
+        goldHover: '#d4af7a',
+        // Back-compat aliases used by shared/admin UI
+        primaryBg: '#050505',
+        secondaryBg: '#0a0a0a',
+        elevatedSurface: '#111111',
+        glassBorder: '#262626',
+        primaryText: '#f5f5f4',
+        secondaryText: '#a1a1aa',
+        accentChampagne: '#c9a86a',
+        accentElectricBlue: '#c9a86a',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
-        manrope: ['var(--font-manrope)', 'sans-serif'],
-        space: ['var(--font-space-grotesk)', 'monospace'],
-        display: ['var(--font-display)', 'serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        manrope: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        space: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Georgia', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-        'scale-in': 'scaleIn 0.5s ease-out forwards',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 6s ease-in-out infinite',
+        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
       },
       keyframes: {
         fadeIn: {
@@ -36,23 +48,9 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.95)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-      },
-      backdropBlur: {
-        xs: '2px',
-      },
-      boxShadow: {
-        pavilion: '0 24px 70px rgba(0, 0, 0, 0.55)',
       },
       maxWidth: {
         shell: '1280px',

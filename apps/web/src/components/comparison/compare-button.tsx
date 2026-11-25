@@ -33,10 +33,10 @@ export function CompareButton({ vehicleId, size = 'md', className }: CompareButt
         () =>
           `rounded-full transition-all duration-300 flex items-center justify-center ${
             isComp
-              ? 'bg-accent-electric-blue text-primaryBg'
+              ? 'border border-gold bg-transparent text-gold'
               : atMax
-                ? 'bg-white/5 border glass-border text-secondaryText opacity-50 cursor-not-allowed'
-                : 'bg-white/5 border glass-border text-secondaryText hover:text-accent-electric-blue hover:bg-white/10'
+                ? 'border border-hairline bg-surface text-muted opacity-50 cursor-not-allowed'
+                : 'border border-hairline bg-surface text-muted hover:text-gold'
           } ${sizes[size]} ${className || ''}`,
         [isComp, atMax, size, className],
       )}

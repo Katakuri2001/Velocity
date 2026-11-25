@@ -4,19 +4,16 @@
 
 @layer base {
   :root {
-    --color-primary-bg: #0B0C0E;
-    --color-secondary-bg: #121315;
-    --color-elevated-surface: rgba(255, 255, 255, 0.04);
-    --color-glass-border: rgba(216, 185, 138, 0.18);
-    --color-primary-text: #ECE9E4;
-    --color-secondary-text: #A6A39C;
-    --color-accent-champagne: #D8B98A;
-    --color-accent-electric-blue: #98BFFF;
-
-    --font-inter: 'Inter', system-ui, sans-serif;
-    --font-manrope: 'Manrope', system-ui, sans-serif;
-    --font-space-grotesk: 'Space Grotesk', system-ui, monospace;
-    --font-display: 'Space Grotesk', system-ui, serif;
+    --color-primary-bg: #050505;
+    --color-surface: #0a0a0a;
+    --color-surface-raised: #111111;
+    --color-card: #141414;
+    --color-border: #262626;
+    --color-primary-text: #f5f5f4;
+    --color-secondary-text: #a1a1aa;
+    --color-accent-gold: #c9a86a;
+    --color-accent-gold-hover: #d4af7a;
+    /* --font-inter and --font-display are injected by next/font on <body>. */
   }
 
   * {
@@ -25,6 +22,7 @@
 
   html {
     scroll-behavior: smooth;
+    background-color: #050505;
   }
 
   body {
@@ -33,6 +31,31 @@
     margin: 0;
     min-height: 100vh;
     overflow-x: hidden;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: #c9a86a;
+    color: #050505;
+  }
+
+  * {
+    scrollbar-color: #262626 transparent;
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -48,15 +71,14 @@
 }
 
 @layer components {
+  /* Flat dark surface — no blur, no shadow, no glow. */
   .glass-panel {
-    background: var(--color-elevated-surface);
-    border: 1px solid var(--color-glass-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
   }
 
   .glass-border {
-    border: 1px solid var(--color-glass-border);
+    border: 1px solid var(--color-border);
   }
 
   .text-primary {
@@ -72,15 +94,12 @@
   }
 
   .bg-secondary {
-    background-color: var(--color-secondary-bg);
+    background-color: var(--color-surface);
   }
 
-  .accent-electric-blue {
-    color: var(--color-accent-electric-blue);
-  }
-
+  .accent-electric-blue,
   .accent-champagne {
-    color: var(--color-accent-champagne);
+    color: var(--color-accent-gold);
   }
 }
 
@@ -104,51 +123,65 @@
     }
   }
 
+  /* Generous rhythm: 64px mobile / 96px desktop. */
+  .section-pad {
+    padding-block: 64px;
+  }
+
+  @media (min-width: 1024px) {
+    .section-pad {
+      padding-block: 96px;
+    }
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+  }
+
+  @media (min-width: 640px) {
+    .eyebrow {
+      font-size: 12px;
+    }
+  }
+
+  .hairline {
+    border-color: var(--color-border);
+  }
+
+  /* No rounded-corner boxes anywhere in the premium surface language. */
+  .rounded-lg,
+  .rounded-xl,
+  .rounded-2xl {
+    border-radius: 0;
+  }
+
   .card-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
+    gap: 24px;
   }
 
   @media (min-width: 640px) {
     .card-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
+      gap: 28px;
     }
   }
 
   @media (min-width: 1280px) {
     .card-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
     }
   }
 
-  .spotlight-card {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .spotlight-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    background: radial-gradient(
-      420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(216, 185, 138, 0.13),
-      transparent 45%
-    );
-    opacity: 0;
-    transition: opacity 300ms ease;
-  }
-
-  .spotlight-card:hover::before {
-    opacity: 1;
-  }
-
   .focus-ring:focus-visible {
-    outline: 2px solid var(--color-accent-champagne);
+    outline: 1px solid var(--color-accent-gold);
     outline-offset: 3px;
   }
 }

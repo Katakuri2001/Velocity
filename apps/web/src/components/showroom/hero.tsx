@@ -3,9 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { BlurText } from './blur-text'
 import { FadeContent } from './fade-content'
-import { Magnet } from './magnet'
 
 export interface HeroProps {
   eyebrow?: string
@@ -13,87 +11,99 @@ export interface HeroProps {
   supportText?: string
   primaryCta: string
   secondaryCta: string
+  featuredImage?: string
+  featuredName?: string
 }
 
-export function Hero({ eyebrow, headline, supportText, primaryCta, secondaryCta }: HeroProps) {
+export function Hero({
+  eyebrow,
+  headline,
+  supportText,
+  primaryCta,
+  secondaryCta,
+  featuredImage,
+  featuredName,
+}: HeroProps) {
   return (
-    <section className="page-container grid items-center gap-10 py-10 md:py-16 lg:grid-cols-12 lg:gap-14 lg:py-24">
-      <div className="lg:col-span-6">
-        {eyebrow && (
-          <FadeContent>
-            <p className="mb-5 text-[0.7rem] font-manrope uppercase tracking-[0.32em] text-accentChampagne">
-              {eyebrow}
-            </p>
+    <section className="relative overflow-hidden border-b border-hairline bg-ink">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_45%,rgba(255,255,255,0.035),transparent_60%)]" aria-hidden="true" />
+
+      <div className="page-container relative grid min-h-[calc(100vh-4rem)] items-center gap-16 py-20 lg:grid-cols-12 lg:gap-12 lg:py-24">
+        <div className="lg:col-span-6">
+          {eyebrow && (
+            <FadeContent>
+              <p className="eyebrow">{eyebrow}</p>
+            </FadeContent>
+          )}
+
+          <FadeContent delay={0.08}>
+            <h1 className="mt-7 max-w-2xl font-display text-[clamp(2.75rem,5vw,4rem)] font-normal leading-[1.03] tracking-[-0.03em] text-primary">
+              {headline}
+            </h1>
           </FadeContent>
-        )}
 
-        <BlurText
-          text={headline}
-          className="block max-w-xl font-display text-[clamp(2.6rem,7vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.04em] text-primaryText"
-        />
+          {supportText && (
+            <FadeContent delay={0.16} className="mt-7 max-w-lg">
+              <p className="text-base leading-relaxed text-muted sm:text-lg">{supportText}</p>
+            </FadeContent>
+          )}
 
-        {supportText && (
-          <FadeContent delay={0.15} className="mt-6 max-w-lg">
-            <p className="text-base leading-relaxed text-secondaryText font-manrope sm:text-lg">
-              {supportText}
-            </p>
-          </FadeContent>
-        )}
-
-        <FadeContent delay={0.25} className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
-          <Magnet>
+          <FadeContent delay={0.24} className="mt-10 flex flex-wrap items-center gap-8">
             <Link
               href="/inventory"
-              className="focus-ring inline-flex w-full items-center justify-center rounded-xl bg-accentChampagne px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-[#241a0c] transition-colors hover:bg-[#e8cfa5] sm:w-auto"
+              className="focus-ring inline-flex items-center border border-gold px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-gold transition-colors duration-300 hover:border-goldHover hover:text-goldHover"
             >
               {primaryCta}
             </Link>
-          </Magnet>
-          <Magnet strength={0.16}>
             <Link
-              href="/contact"
-              className="focus-ring inline-flex w-full items-center justify-center rounded-xl border border-glassBorder px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-primaryText transition-colors hover:bg-white/5 sm:w-auto"
+              href="/inventory/ferrari-sf90#enquiry"
+              className="focus-ring border-b border-hairline pb-1 text-[11px] uppercase tracking-[0.2em] text-muted transition-colors duration-300 hover:border-gold hover:text-primary"
             >
               {secondaryCta}
             </Link>
-          </Magnet>
-        </FadeContent>
+          </FadeContent>
 
-        <FadeContent delay={0.35} className="mt-10 flex items-center gap-3 text-xs font-manrope text-secondaryText">
-          <span className="h-px w-8 bg-accentChampagne/60" />
-          <span>Curated performance · Private collection</span>
-        </FadeContent>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative lg:col-span-6"
-      >
-        <div className="relative h-[300px] overflow-hidden rounded-2xl border border-glassBorder bg-secondaryBg shadow-pavilion sm:h-[420px] lg:h-[560px]">
-          <Image
-            src="/images/hero/hero-candidate-1.jpg"
-            alt="Cinematic sports car hero"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-primaryBg/85 via-primaryBg/10 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
-            <div>
-              <p className="text-[0.65rem] font-manrope uppercase tracking-[0.28em] text-accentChampagne">
-                Featured
-              </p>
-              <p className="mt-1 font-display text-xl text-primaryText sm:text-2xl">The art of the drive</p>
-            </div>
-            <span className="hidden rounded-full border border-glassBorder px-3 py-1 text-[0.65rem] uppercase tracking-widest text-secondaryText sm:block">
-              01 / 04
-            </span>
-          </div>
+          <FadeContent delay={0.32} className="mt-14 flex items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-muted/70">
+            <span className="h-px w-10 bg-gold/60" aria-hidden="true" />
+            <span>Curated performance · Private collection</span>
+          </FadeContent>
         </div>
-      </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.24, ease: 'easeOut' }}
+          className="lg:col-span-6"
+        >
+          <div className="relative aspect-[5/4] w-full border border-hairline bg-surface sm:aspect-[4/3] lg:aspect-auto lg:h-[620px]">
+            {featuredImage ? (
+              <Image
+                src={featuredImage}
+                alt={featuredName || 'Featured vehicle'}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain object-center p-6 sm:p-10"
+                priority
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center text-sm text-muted">
+                Featured vehicle on enquiry
+              </div>
+            )}
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between border-t border-hairline bg-ink/70 px-5 py-4 sm:px-7">
+              <div>
+                <p className="eyebrow">Featured</p>
+                <p className="mt-1 font-display text-xl text-primary sm:text-2xl">
+                  {featuredName || 'The art of the drive'}
+                </p>
+              </div>
+              <span className="hidden text-[11px] uppercase tracking-[0.2em] text-muted/70 sm:block">
+                Velocity collection
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }

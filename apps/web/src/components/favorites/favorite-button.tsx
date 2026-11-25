@@ -31,8 +31,8 @@ export function FavoriteButton({ vehicleId, size = 'md', className }: FavoriteBu
         () =>
           `rounded-full transition-all duration-300 flex items-center justify-center ${
             isFavorited
-              ? 'bg-accent-electric-blue text-primaryBg'
-              : 'bg-white/5 border glass-border text-secondaryText hover:text-accent-electric-blue hover:bg-white/10'
+              ? 'border border-gold bg-transparent text-gold'
+              : 'border border-hairline bg-surface text-muted hover:text-gold'
           } ${sizes[size]} ${className || ''}`,
         [isFavorited, size, className],
       )}

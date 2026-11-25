@@ -1,101 +1,88 @@
 'use client'
 
-import * as React from 'react'
-import { GlassPanel } from '@/components/ui/glass-panel'
+import { formatSpec } from '@/lib/presentation'
 
 interface VehicleSpecificationsProps {
   specifications: any[]
   vehicle: any
 }
 
-interface SpecGroup {
-  group: string
-  items: { key: string; value: string }[]
-}
+/** Standard spec rows. Values come from the record only — never invented. */
+const SPEC_GROUPS: Array<{ group: string; rows: Array<{ label: string; key: string; field?: string }> }> = [
+  {
+    group: 'Engine',
+    rows: [
+      { label: 'Engine capacity', key: 'engine', field: 'engine_capacity' },
+      { label: 'Horsepower', key: 'horsepower', field: 'horsepower' },
+      { label: 'Torque', key: 'torque', field: 'torque' },
+      { label: 'Fuel type', key: 'fuel_type', field: 'fuel_type' },
+    ],
+  },
+  {
+    group: 'Performance',
+    rows: [
+      { label: 'Acceleration 0–100 km/h', key: 'acceleration', field: 'acceleration' },
+      { label: 'Top speed', key: 'top_speed', field: 'top_speed' },
+    ],
+  },
+  {
+    group: 'Transmission & handling',
+    rows: [
+      { label: 'Transmission', key: 'transmission', field: 'transmission' },
+      { label: 'Drivetrain', key: 'drivetrain', field: 'drivetrain' },
+    ],
+  },
+  {
+    group: 'Vehicle',
+    rows: [
+      { label: 'Exterior colour', key: 'exterior_color', field: 'exterior_color' },
+      { label: 'Interior colour', key: 'interior_color', field: 'interior_color' },
+      { label: 'Mileage', key: 'mileage', field: 'mileage' },
+      { label: 'Condition', key: 'condition', field: 'condition' },
+    ],
+  },
+]
 
 export function VehicleSpecifications({ specifications, vehicle }: VehicleSpecificationsProps) {
-  // Group specifications by spec_group
-  const groups: SpecGroup[] = []
+  const stored = new Map<string, string>()
   specifications.forEach((spec) => {
-    let group = groups.find((g) => g.group === spec.spec_group)
-    if (!group) {
-      group = { group: spec.spec_group, items: [] }
-      groups.push(group)
+    if (spec?.spec_key && spec?.spec_value !== null && spec?.spec_value !== undefined) {
+      stored.set(String(spec.spec_key).trim().toLowerCase(), String(spec.spec_value))
     }
-    group.items.push({ key: spec.spec_key, value: spec.spec_value })
   })
 
-  // Fallback groups from vehicle fields if no specifications table data
-  const fallbackGroups: SpecGroup[] = [
-    {
-      group: 'Engine',
-      items: [
-        { key: 'Engine type', value: vehicle.engine_capacity ? `${vehicle.engine_capacity}L` : '—' },
-        { key: 'Horsepower', value: vehicle.horsepower ? `${vehicle.horsepower} hp` : '—' },
-        { key: 'Torque', value: vehicle.torque ? `${vehicle.torque} Nm` : '—' },
-        { key: 'Fuel type', value: vehicle.fuel_type || '—' },
-      ].filter((i) => i.value !== '—'),
-    },
-    {
-      group: 'Performance',
-      items: [
-        { key: 'Acceleration 0-100 km/h', value: vehicle.acceleration || '—' },
-        { key: 'Top speed', value: vehicle.top_speed || '—' },
-        { key: 'Drivetrain', value: vehicle.drivetrain || '—' },
-      ].filter((i) => i.value !== '—'),
-    },
-    {
-      group: 'Transmission',
-      items: [
-        { key: 'Type', value: vehicle.transmission || '—' },
-      ].filter((i) => i.value !== '—'),
-    },
-    {
-      group: 'Vehicle',
-      items: [
-        { key: 'Body type', value: vehicle.category_id ? '—' : '—' },
-        { key: 'Exterior color', value: vehicle.exterior_color || '—' },
-        { key: 'Interior color', value: vehicle.interior_color || '—' },
-        { key: 'Seats', value: '—' },
-        { key: 'Doors', value: '—' },
-      ].filter((i) => i.value !== '—'),
-    },
-    {
-      group: 'Dimensions',
-      items: [],
-    },
-    {
-      group: 'Other',
-      items: [
-        { key: 'Mileage', value: vehicle.mileage ? `${vehicle.mileage.toLocaleString()} km` : '—' },
-        { key: 'Registration year', value: String(vehicle.year) },
-        { key: 'Condition', value: vehicle.condition },
-      ].filter((i) => i.value !== '—'),
-    },
-  ]
-
-  const displayGroups = groups.length > 0 ? groups : fallbackGroups.filter((g) => g.items.length > 0)
+  const valueFor = (key: string, field?: string): unknown => {
+    const fromSpecs = stored.get(key.toLowerCase())
+    if (fromSpecs !== undefined) return fromSpecs
+    const fromVehicle = field ? vehicle?.[field] : undefined
+    if (typeof fromVehicle === 'number' && field === 'mileage') return `${fromVehicle.toLocaleString()} km`
+    return fromVehicle ?? null
+  }
 
   return (
-    <div className="space-y-4">
-      <h2 className="font-display text-xl font-bold text-primaryText mb-2">
-        Technical specifications
-      </h2>
-      {displayGroups.map((group) => (
-        <div key={group.group}>
-          <h3 className="text-xs font-manrope font-semibold text-accent-champagne uppercase tracking-wider mb-3">
-            {group.group}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {group.items.map((item) => (
-              <div key={`${group.group}-${item.key}`} className="flex justify-between pb-2 border-b border-white/5 last:border-0">
-                <span className="text-sm text-secondaryText font-manrope">{item.key}</span>
-                <span className="text-sm text-primaryText">{item.value}</span>
-              </div>
-            ))}
+    <div>
+      <h2 className="font-display text-2xl font-normal text-primary">Specifications</h2>
+      <div className="mt-8 space-y-10">
+        {SPEC_GROUPS.map(({ group, rows }) => (
+          <div key={group}>
+            <h3 className="eyebrow">{group}</h3>
+            <dl className="mt-3 border-t border-hairline">
+              {rows.map(({ label, key, field }) => {
+                const value = valueFor(key, field)
+                const missing = value === null || value === undefined || String(value).trim() === ''
+                return (
+                  <div key={`${group}-${key}`} className="flex items-baseline justify-between gap-6 border-b border-hairline py-3">
+                    <dt className="text-[11px] uppercase tracking-[0.2em] text-muted/70">{label}</dt>
+                    <dd className={`text-right text-sm ${missing ? 'text-muted/70' : 'text-primary'}`}>
+                      {formatSpec(value)}
+                    </dd>
+                  </div>
+                )
+              })}
+            </dl>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

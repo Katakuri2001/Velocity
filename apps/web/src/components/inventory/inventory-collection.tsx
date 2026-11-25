@@ -21,23 +21,25 @@ export function InventoryCollection({ vehicles, manufacturerNames }: InventoryCo
 
       {mode === 'grid' ? (
         <div className="card-grid">
-          {vehicles.map((vehicle) => (
+          {vehicles.map((vehicle, index) => (
             <VehicleCard
               key={vehicle.id}
               vehicle={vehicle}
               manufacturerName={manufacturerNames[vehicle.manufacturer_id]}
               layout="grid"
+              priority={index === 0}
             />
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6">
-          {vehicles.map((vehicle) => (
+          {vehicles.map((vehicle, index) => (
             <VehicleCard
               key={vehicle.id}
               vehicle={vehicle}
               manufacturerName={manufacturerNames[vehicle.manufacturer_id]}
               layout="list"
+              priority={index === 0}
             />
           ))}
         </div>

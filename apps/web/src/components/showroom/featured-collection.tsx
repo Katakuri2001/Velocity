@@ -35,6 +35,7 @@ export function FeaturedCollection({ vehicles, manufacturerNames }: FeaturedColl
               <VehicleCard
                 vehicle={vehicle}
                 manufacturerName={manufacturerNames[vehicle.manufacturer_id]}
+                priority={index === 0 || vehicle.slug === 'ferrari-sf90'}
               />
             </FadeContent>
           ))}

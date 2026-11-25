@@ -56,7 +56,7 @@ export function Hero({
               {primaryCta}
             </Link>
             <Link
-              href="/contact"
+              href="/inventory/ferrari-sf90#enquiry"
               className="focus-ring border-b border-hairline pb-1 text-[11px] uppercase tracking-[0.2em] text-muted transition-colors duration-300 hover:border-gold hover:text-primary"
             >
               {secondaryCta}

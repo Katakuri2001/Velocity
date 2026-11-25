@@ -4,7 +4,6 @@ import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useSession } from '@/components/auth/session-provider'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
@@ -15,7 +14,6 @@ const navLinks = [
 ]
 
 export function Navbar() {
-  const { session } = useSession()
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
@@ -51,32 +49,12 @@ export function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-6 lg:flex">
-            {session ? (
-              <>
-                <span className="max-w-40 truncate text-xs text-muted">{session.user.email}</span>
-                <button
-                  type="button"
-                  className="focus-ring border-b border-hairline pb-0.5 text-[11px] uppercase tracking-[0.2em] text-muted transition-colors duration-300 hover:border-gold hover:text-primary"
-                >
-                  Sign out
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/login"
-                  className="focus-ring text-[11px] uppercase tracking-[0.2em] text-muted transition-colors duration-300 hover:text-primary"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  href="/signup"
-                  className="focus-ring border border-hairline px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:border-gold/60 hover:text-gold"
-                >
-                  Create account
-                </Link>
-              </>
-            )}
+            <Link
+              href="/inventory/ferrari-sf90#enquiry"
+              className="focus-ring border border-hairline px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:border-gold/60 hover:text-gold"
+            >
+              Enquire
+            </Link>
           </div>
 
           <button
@@ -113,29 +91,14 @@ export function Navbar() {
                     {link.label}
                   </Link>
                 ))}
-                <div className="mt-3 flex flex-col gap-4 border-t border-hairline pt-5">
-                  {session ? (
-                    <button className="focus-ring text-left text-[11px] uppercase tracking-[0.2em] text-muted">
-                      Sign out
-                    </button>
-                  ) : (
-                    <>
-                      <Link
-                        href="/login"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="focus-ring text-[11px] uppercase tracking-[0.2em] text-muted"
-                      >
-                        Sign in
-                      </Link>
-                      <Link
-                        href="/signup"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="focus-ring w-fit border border-hairline px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-primary"
-                      >
-                        Create account
-                      </Link>
-                    </>
-                  )}
+                <div className="mt-3 border-t border-hairline pt-5">
+                  <Link
+                    href="/inventory/ferrari-sf90#enquiry"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="focus-ring inline-block border border-hairline px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-primary"
+                  >
+                    Enquire
+                  </Link>
                 </div>
               </nav>
             </motion.div>

@@ -34,7 +34,7 @@ export function Footer() {
 
           <div className="md:col-span-3">
             <p className="eyebrow">Contact</p>
-            <Link href="/contact" className="focus-ring mt-6 inline-block text-sm text-muted transition-colors duration-300 hover:text-primary">
+            <Link href="/inventory/ferrari-sf90#enquiry" className="focus-ring mt-6 inline-block text-sm text-muted transition-colors duration-300 hover:text-primary">
               Speak with the showroom
             </Link>
             <p className="mt-6 text-xs text-muted/80">Demo content. Not real inventory.</p>

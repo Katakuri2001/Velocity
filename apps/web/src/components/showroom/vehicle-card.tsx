@@ -10,6 +10,7 @@ export interface VehicleCardProps {
   manufacturerName?: string
   layout?: 'grid' | 'list'
   showActions?: boolean
+  priority?: boolean
 }
 
 export function VehicleCard({
@@ -17,6 +18,7 @@ export function VehicleCard({
   manufacturerName,
   layout = 'grid',
   showActions = true,
+  priority = false,
 }: VehicleCardProps) {
   const make = manufacturerName || vehicle.manufacturer_id || 'Manufacturer'
   const isList = layout === 'list'
@@ -42,6 +44,7 @@ export function VehicleCard({
             fill
             className="object-center p-5 transition-transform duration-[400ms] ease-out group-hover:scale-[1.02] sm:p-6"
             fit="contain"
+            priority={priority}
             sizes={isList ? '(max-width: 640px) 100vw, 38vw' : '(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw'}
           />
         ) : (

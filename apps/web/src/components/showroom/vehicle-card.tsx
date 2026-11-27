@@ -7,19 +7,29 @@ import type { Vehicle } from '@/types/database'
 
 export interface VehicleCardProps {
   vehicle: Vehicle & { image_url?: string }
+  manufacturerName?: string
+  layout?: 'grid' | 'list'
   showActions?: boolean
+  priority?: boolean
 }
 
 const PRICE_MISSING = 'To be confirmed'
 
-export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
-  const make = vehicle.manufacturer_id || 'Unknown'
+export function VehicleCard({
+  vehicle,
+  manufacturerName,
+  layout = 'grid',
+  showActions = true,
+  priority = false,
+}: VehicleCardProps) {
+  const make = manufacturerName || vehicle.manufacturer_id || 'Unknown'
+  const href = `/inventory/${vehicle.slug}`
 
   return (
     <article className="group h-full">
       <div className="flex h-full flex-col overflow-hidden rounded-xl border border-[#262626] bg-[#141414] transition-[border-color] duration-[400ms] ease-out group-hover:border-[rgba(201,168,106,0.4)]">
         <Link
-          href={`/inventory/${vehicle.slug}`}
+          href={href}
           className="focus-ring relative block aspect-[4/3] w-full overflow-hidden bg-[#0a0a0a]"
           aria-label={`View ${make} ${vehicle.model}`}
         >
@@ -30,6 +40,7 @@ export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
               fill
               className="p-6 transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
               fit="contain"
+              priority={priority}
               sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
             />
           ) : (
@@ -48,7 +59,7 @@ export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
             {make}
           </p>
           <h3 className="mt-2 font-display text-xl font-semibold leading-tight text-primaryText">
-            <Link href={`/inventory/${vehicle.slug}`} className="focus-ring hover:text-accentChampagne">
+            <Link href={href} className="focus-ring hover:text-accentChampagne">
               {vehicle.model}
               {vehicle.variant ? ` - ${vehicle.variant}` : ''}
             </Link>
@@ -71,7 +82,7 @@ export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
           {showActions && (
             <div className="mt-4 flex gap-2 border-t border-[#262626] pt-4">
               <Link
-                href={`/inventory/${vehicle.slug}`}
+                href={href}
                 className="focus-ring flex-1 rounded-lg border border-[#262626] px-3 py-2 text-center text-xs font-manrope text-primaryText transition-colors duration-[400ms] hover:border-[rgba(201,168,106,0.4)]"
               >
                 View details

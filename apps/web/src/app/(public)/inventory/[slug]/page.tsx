@@ -5,8 +5,6 @@ import { VehicleSpecifications } from '@/components/showroom/vehicle-specificati
 import { VehicleFeatures } from '@/components/showroom/vehicle-features'
 import { VehicleEnquiryPanel } from '@/components/showroom/vehicle-enquiry-panel'
 import { RelatedVehicles } from '@/components/showroom/related-vehicles'
-import { GlassPanel } from '@/components/ui/glass-panel'
-import { Skeleton } from '@/components/ui/skeleton'
 import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
@@ -59,9 +57,11 @@ interface DetailPageProps {
 }
 
 export default async function VehicleDetailPage({ params }: DetailPageProps) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/vehicles/${params.slug}`, {
-    cache: 'no-store',
-  })
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const [res, manuRes] = await Promise.all([
+    fetch(`${baseUrl}/api/vehicles/${params.slug}`, { cache: 'no-store' }),
+    fetch(`${baseUrl}/api/manufacturers`, { cache: 'no-store' }),
+  ])
 
   if (res.status === 404) {
     notFound()
@@ -69,40 +69,44 @@ export default async function VehicleDetailPage({ params }: DetailPageProps) {
 
   const data = await res.json()
   const { vehicle, images, specifications } = data
+  const manufacturers = await manuRes.json().catch(() => ({ manufacturers: [] }))
+  const manufacturerNames: Record<string, string> = (manufacturers.manufacturers || []).reduce(
+    (acc: Record<string, string>, m: { id: string; name: string }) => {
+      acc[m.id] = m.name
+      return acc
+    },
+    {},
+  )
+  const manufacturerName = manufacturerNames[vehicle.manufacturer_id] || 'Manufacturer'
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      <nav className="flex items-center gap-2 text-sm text-secondaryText font-manrope mb-8">
-        <a href="/inventory" className="hover:text-primaryText transition-colors">
-          Inventory
-        </a>
-        <span>/</span>
-        <span className="text-primaryText">{vehicle.model}</span>
+    <div className="page-container section-pad">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-3 border-b border-hairline pb-6 text-[11px] uppercase tracking-[0.2em] text-muted">
+        <a href="/inventory" className="focus-ring transition-colors duration-300 hover:text-primary">Inventory</a>
+        <span aria-hidden="true" className="text-muted/40">/</span>
+        <span className="text-primary">{vehicle.model}</span>
       </nav>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div className="lg:col-span-8">
-          <VehicleGallery images={images} vehicle={vehicle} />
+      <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-7">
+          <VehicleGallery images={images} vehicle={vehicle} manufacturerName={manufacturerName} />
         </div>
 
-        <div className="lg:col-span-4 flex flex-col gap-8">
-          <VehicleIdentity vehicle={vehicle} />
-
-          <GlassPanel className="rounded-xl p-6 border glass-border">
+        <div className="flex flex-col gap-12 lg:col-span-5">
+          <VehicleIdentity vehicle={vehicle} manufacturerName={manufacturerName} />
+          <section className="border-t border-hairline pt-8">
             <VehicleSpecifications specifications={specifications} vehicle={vehicle} />
-          </GlassPanel>
-
-          <GlassPanel className="rounded-xl p-6 border glass-border">
+          </section>
+          <section className="border-t border-hairline pt-8">
             <VehicleFeatures vehicle={vehicle} />
-          </GlassPanel>
-
-          <GlassPanel className="rounded-xl p-6 border glass-border">
+          </section>
+          <section className="border-t border-hairline pt-8">
             <VehicleEnquiryPanel vehicle={vehicle} />
-          </GlassPanel>
+          </section>
         </div>
       </div>
 
-      <div className="mt-16">
+      <div className="mt-24 border-t border-hairline pt-12">
         <RelatedVehicles vehicle={vehicle} />
       </div>
     </div>

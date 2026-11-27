@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { GlassPanel } from '@/components/ui/glass-panel'
 
 interface SortControlsProps {
   currentSort: string
@@ -25,8 +24,8 @@ export function SortControls({ currentSort }: SortControlsProps) {
   }
 
   return (
-    <GlassPanel className="min-w-0 flex-1 rounded-lg border border-glassBorder px-4 py-3">
-      <span className="mr-3 text-xs font-manrope font-semibold uppercase text-[#e4e4e7]">
+    <div className="flex flex-col gap-3 border border-hairline bg-surface px-4 py-3 sm:flex-row sm:items-center">
+      <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-[#e4e4e7]">
         Sort by:
       </span>
       <div className="flex gap-2 overflow-x-auto pb-1">
@@ -35,7 +34,7 @@ export function SortControls({ currentSort }: SortControlsProps) {
             key={opt.value}
             href={buildUrl(opt.value)}
             aria-current={currentSort === opt.value ? 'page' : undefined}
-            className={`rounded-md px-3 py-1.5 text-xs font-manrope transition-colors whitespace-nowrap ${
+            className={`whitespace-nowrap px-3 py-1.5 text-xs transition-colors ${
               currentSort === opt.value
                 ? 'bg-[#ffffff] font-semibold text-[#111111]'
                 : 'text-[#d4d4d8] hover:bg-white/5 hover:text-[#ffffff]'
@@ -45,6 +44,6 @@ export function SortControls({ currentSort }: SortControlsProps) {
           </Link>
         ))}
       </div>
-    </GlassPanel>
+    </div>
   )
 }

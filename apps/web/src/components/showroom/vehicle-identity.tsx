@@ -6,9 +6,10 @@ import { Button } from '@/components/ui/button'
 
 interface VehicleIdentityProps {
   vehicle: any
+  manufacturerName?: string
 }
 
-export function VehicleIdentity({ vehicle }: VehicleIdentityProps) {
+export function VehicleIdentity({ vehicle, manufacturerName }: VehicleIdentityProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

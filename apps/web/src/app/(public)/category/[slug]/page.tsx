@@ -54,13 +54,17 @@ interface CategoryPageProps {
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const [catRes, vehRes] = await Promise.all([
+  const [catRes, vehRes, manuRes] = await Promise.all([
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/categories`, { cache: 'no-store' }),
     fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/vehicles?category=${encodeURIComponent(params.slug)}&limit=12`, { cache: 'no-store' }),
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/manufacturers`, { cache: 'no-store' }),
   ])
 
-  const catData = await catRes.json()
-  const vehData = await vehRes.json()
+  const [catData, vehData, manuData] = await Promise.all([
+    catRes.json(),
+    vehRes.json(),
+    manuRes.json(),
+  ])
   const category = catData.categories?.find((c: any) => c.slug === params.slug)
 
   if (!category) {
@@ -68,6 +72,13 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   const vehicles = vehData.vehicles || []
+  const manufacturerNames: Record<string, string> = (manuData.manufacturers || []).reduce(
+    (acc: Record<string, string>, m: { id: string; name: string }) => {
+      acc[m.id] = m.name
+      return acc
+    },
+    {},
+  )
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -117,14 +128,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               </div>
             ) : (
               <>
-                {vehicles.map((v: any) => (
+                {vehicles.map((v: any, index: number) => (
                   <div key={v.id} className="glass-panel rounded-xl overflow-hidden h-[420px] flex flex-col border glass-border">
                     <div className="relative w-full h-[280px] bg-secondaryBg">
                       {v.image_url ? (
                         <ImageOptimizer
                           src={v.image_url}
-                          alt={`${v.manufacturer_id} ${v.model} ${v.year}`}
+                          alt={`${manufacturerNames[v.manufacturer_id] || v.manufacturer_id} ${v.model} ${v.year}`}
                           fill
+                          priority={index === 0}
                           className="object-cover object-center"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
@@ -137,12 +149,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         {v.model} {v.variant ? `- ${v.variant}` : ''}
                       </h3>
                       <p className="text-sm text-secondaryText font-manrope mt-1">
-                        {v.year} • {v.price.toLocaleString()}
+                        {v.year} •{' '}
+                        {v.price ? (
+                          v.price.toLocaleString()
+                        ) : (
+                          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accentChampagne">
+                            Price on enquiry
+                          </span>
+                        )}
                       </p>
                       <div className="mt-auto flex gap-2 text-xs text-secondaryText font-manrope">
-                        <span>{v.transmission || '—'}</span>
+                        <span>{v.transmission || 'To be confirmed'}</span>
                         <span>•</span>
-                        <span>{v.fuel_type || '—'}</span>
+                        <span>{v.fuel_type || 'To be confirmed'}</span>
                       </div>
                     </div>
                   </div>

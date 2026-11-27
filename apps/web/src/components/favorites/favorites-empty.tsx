@@ -14,7 +14,7 @@ export function FavoritesEmpty() {
       </p>
       <Link
         href="/inventory"
-        className="focus-ring mt-8 inline-flex rounded-xl bg-accentChampagne px-7 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#241a0c] transition-colors hover:bg-[#e8cfa5]"
+        className="focus-ring mt-8 inline-flex border border-gold px-7 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-gold transition-colors duration-300 hover:border-goldHover hover:text-goldHover"
       >
         Browse inventory
       </Link>

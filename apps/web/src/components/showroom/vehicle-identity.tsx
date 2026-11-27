@@ -6,9 +6,10 @@ import { Button } from '@/components/ui/button'
 
 interface VehicleIdentityProps {
   vehicle: any
+  manufacturerName?: string
 }
 
-export function VehicleIdentity({ vehicle }: VehicleIdentityProps) {
+export function VehicleIdentity({ vehicle, manufacturerName }: VehicleIdentityProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -29,14 +30,22 @@ export function VehicleIdentity({ vehicle }: VehicleIdentityProps) {
       </h1>
 
       <div className="flex items-center gap-4 mb-6">
-        <span className="text-2xl font-bold text-accent-electric-blue">
-          ${vehicle.price.toLocaleString()}
-        </span>
-        <span className="text-sm text-secondaryText font-manrope">{vehicle.currency}</span>
+        {vehicle.price ? (
+          <span className="text-2xl font-bold text-accent-electric-blue">
+            ${vehicle.price.toLocaleString()}
+          </span>
+        ) : (
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accent-champagne">
+            Price on enquiry
+          </span>
+        )}
+        {vehicle.price ? (
+          <span className="text-sm text-secondaryText font-manrope">{vehicle.currency}</span>
+        ) : null}
         <span className="px-2 py-1 rounded-md bg-white/5 border glass-border text-xs text-accent-champagne">
           {vehicle.availability}
         </span>
-        <span className="text-xs text-secondaryText font-manrope">Stock: {vehicle.stock_number || '—'}</span>
+        <span className="text-xs text-secondaryText font-manrope">Stock: {vehicle.stock_number || 'To be confirmed'}</span>
       </div>
 
       <div className="grid grid-cols-2 gap-3 text-sm text-secondaryText font-manrope">

@@ -4,19 +4,19 @@
 
 @layer base {
   :root {
-    --color-primary-bg: #0B0C0E;
-    --color-secondary-bg: #121315;
+    --color-primary-bg: #050505;
+    --color-secondary-bg: #0b0b0c;
     --color-elevated-surface: rgba(255, 255, 255, 0.04);
-    --color-glass-border: rgba(216, 185, 138, 0.18);
-    --color-primary-text: #ECE9E4;
+    --color-glass-border: rgba(201, 168, 106, 0.18);
+    --color-primary-text: #F2EFE9;
     --color-secondary-text: #A6A39C;
-    --color-accent-champagne: #D8B98A;
+    --color-accent-champagne: #c9a86a;
     --color-accent-electric-blue: #98BFFF;
 
     --font-inter: 'Inter', system-ui, sans-serif;
     --font-manrope: 'Manrope', system-ui, sans-serif;
     --font-space-grotesk: 'Space Grotesk', system-ui, monospace;
-    --font-display: 'Space Grotesk', system-ui, serif;
+    --font-display: var(--font-playfair), 'Playfair Display', Georgia, serif;
   }
 
   * {

@@ -137,12 +137,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         {v.model} {v.variant ? `- ${v.variant}` : ''}
                       </h3>
                       <p className="text-sm text-secondaryText font-manrope mt-1">
-                        {v.year} • {v.price.toLocaleString()}
+                        {v.year} •{' '}
+                        {v.price ? (
+                          v.price.toLocaleString()
+                        ) : (
+                          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accentChampagne">
+                            Price on enquiry
+                          </span>
+                        )}
                       </p>
                       <div className="mt-auto flex gap-2 text-xs text-secondaryText font-manrope">
-                        <span>{v.transmission || '—'}</span>
+                        <span>{v.transmission || 'To be confirmed'}</span>
                         <span>•</span>
-                        <span>{v.fuel_type || '—'}</span>
+                        <span>{v.fuel_type || 'To be confirmed'}</span>
                       </div>
                     </div>
                   </div>

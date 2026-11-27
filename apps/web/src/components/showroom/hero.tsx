@@ -1,99 +1,74 @@
 'use client'
 
-import Image from 'next/image'
+import * as React from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { BlurText } from './blur-text'
-import { FadeContent } from './fade-content'
-import { Magnet } from './magnet'
+import { CinematicReveal } from './cinematic-reveal'
 
-export interface HeroProps {
-  eyebrow?: string
-  headline: string
-  supportText?: string
-  primaryCta: string
-  secondaryCta: string
-}
+const R2_CAR =
+  'https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/ferrari/ferrari-sf90/primary.png'
+const LOCAL_CAR = '/images/previewcars/ferrari-sf90.jpg'
 
-export function Hero({ eyebrow, headline, supportText, primaryCta, secondaryCta }: HeroProps) {
+/**
+ * Noir editorial hero: one front-on car, thin gold light strips, one headline.
+ * No video, no carousel, no gradients, no cropped car.
+ */
+export function Hero() {
+  const [carSrc, setCarSrc] = React.useState(R2_CAR)
+
   return (
-    <section className="page-container grid items-center gap-10 py-10 md:py-16 lg:grid-cols-12 lg:gap-14 lg:py-24">
-      <div className="lg:col-span-6">
-        {eyebrow && (
-          <FadeContent>
-            <p className="mb-5 text-[0.7rem] font-manrope uppercase tracking-[0.32em] text-accentChampagne">
-              {eyebrow}
+    <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[#050505]">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-5 w-px bg-[#c9a86a]/30 sm:left-10" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-5 w-px bg-[#c9a86a]/30 sm:right-10" />
+      <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-px w-[70vw] -translate-x-1/2 bg-[#c9a86a]/20" />
+
+      <div className="relative px-5 pb-14 pt-28 sm:px-8 md:pb-20 md:pt-32">
+        <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
+          <CinematicReveal>
+            <p className="text-[0.7rem] font-manrope uppercase tracking-[0.42em] text-[#c9a86a]">
+              The collection
             </p>
-          </FadeContent>
-        )}
+          </CinematicReveal>
 
-        <BlurText
-          text={headline}
-          className="block max-w-xl font-display text-[clamp(2.6rem,7vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.04em] text-primaryText"
-        />
+          <CinematicReveal delay={0.08}>
+            <h1 className="mt-6 font-display text-[clamp(3rem,9.5vw,7rem)] font-normal italic leading-[0.98] text-[#f5f0e8]">
+              The art of arrival.
+            </h1>
+          </CinematicReveal>
 
-        {supportText && (
-          <FadeContent delay={0.15} className="mt-6 max-w-lg">
-            <p className="text-base leading-relaxed text-secondaryText font-manrope sm:text-lg">
-              {supportText}
+          <CinematicReveal delay={0.16}>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-[#d4d4d8] sm:text-lg">
+              Eleven cars. One standard.
             </p>
-          </FadeContent>
-        )}
+          </CinematicReveal>
 
-        <FadeContent delay={0.25} className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
-          <Magnet>
+          <CinematicReveal delay={0.24}>
             <Link
               href="/inventory"
-              className="focus-ring inline-flex w-full items-center justify-center rounded-xl bg-accentChampagne px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-[#241a0c] transition-colors hover:bg-[#e8cfa5] sm:w-auto"
+              className="focus-ring mt-9 inline-flex min-h-[48px] items-center justify-center rounded-full border border-[#c9a86a] px-8 py-3 text-xs font-manrope uppercase tracking-[0.22em] text-[#e7dcc4] transition-colors duration-[400ms] hover:bg-[#c9a86a] hover:text-[#050505]"
             >
-              {primaryCta}
+              Explore collection
             </Link>
-          </Magnet>
-          <Magnet strength={0.16}>
-            <Link
-              href="/contact"
-              className="focus-ring inline-flex w-full items-center justify-center rounded-xl border border-glassBorder px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-primaryText transition-colors hover:bg-white/5 sm:w-auto"
-            >
-              {secondaryCta}
-            </Link>
-          </Magnet>
-        </FadeContent>
+          </CinematicReveal>
 
-        <FadeContent delay={0.35} className="mt-10 flex items-center gap-3 text-xs font-manrope text-secondaryText">
-          <span className="h-px w-8 bg-accentChampagne/60" />
-          <span>Curated performance · Private collection</span>
-        </FadeContent>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative lg:col-span-6"
-      >
-        <div className="relative h-[300px] overflow-hidden rounded-2xl border border-glassBorder bg-secondaryBg shadow-pavilion sm:h-[420px] lg:h-[560px]">
-          <Image
-            src="/images/hero/hero-candidate-1.jpg"
-            alt="Cinematic sports car hero"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-primaryBg/85 via-primaryBg/10 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
-            <div>
-              <p className="text-[0.65rem] font-manrope uppercase tracking-[0.28em] text-accentChampagne">
-                Featured
-              </p>
-              <p className="mt-1 font-display text-xl text-primaryText sm:text-2xl">The art of the drive</p>
+          <CinematicReveal delay={0.32} className="mt-12 w-full">
+            <div className="relative mx-auto w-full max-w-4xl">
+              <img
+                src={carSrc}
+                onError={() => setCarSrc(LOCAL_CAR)}
+                alt="Ferrari SF90, front view"
+                width={1024}
+                height={1024}
+                className="mx-auto block h-auto max-h-[44vh] w-auto max-w-full object-contain"
+                loading="eager"
+                decoding="async"
+              />
             </div>
-            <span className="hidden rounded-full border border-glassBorder px-3 py-1 text-[0.65rem] uppercase tracking-widest text-secondaryText sm:block">
-              01 / 04
-            </span>
-          </div>
+            <p className="mt-5 text-[0.68rem] font-manrope uppercase tracking-[0.34em] text-[#a6a39c]">
+              Ferrari SF90
+            </p>
+          </CinematicReveal>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

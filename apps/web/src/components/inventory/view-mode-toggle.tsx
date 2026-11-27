@@ -3,10 +3,20 @@
 import * as React from 'react'
 import { GlassPanel } from '@/components/ui/glass-panel'
 
-interface ViewModeToggleProps {}
+interface ViewModeToggleProps {
+  mode?: 'grid' | 'list'
+  onModeChange?: (mode: 'grid' | 'list') => void
+}
 
-export function ViewModeToggle() {
-  const [mode, setMode] = React.useState<'grid' | 'list'>('grid')
+export function ViewModeToggle({ mode: controlledMode, onModeChange }: ViewModeToggleProps) {
+  const [internalMode, setInternalMode] = React.useState<'grid' | 'list'>('grid')
+
+  const mode = controlledMode ?? internalMode
+
+  const setMode = (next: 'grid' | 'list') => {
+    setInternalMode(next)
+    onModeChange?.(next)
+  }
 
   const baseButton = 'px-3 py-1.5 rounded-md text-xs font-manrope font-semibold transition-colors border'
 

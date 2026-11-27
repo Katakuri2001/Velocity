@@ -1,16 +1,23 @@
 import { Hero } from '@/components/showroom/hero'
+import { ShowroomSection } from '@/components/showroom/showroom-section'
+import {
+  DetailSection,
+  FooterCloser,
+  IvorySection,
+  NumberedCards,
+} from '@/components/showroom/cinematic-sections'
+import { IntroOverlay } from '@/components/intro/intro-overlay'
 import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Beyond the Ordinary — Premium Automotive Showroom',
+  title: 'The art of arrival — Velocity Showroom',
   description:
-    'Discover an exceptional collection of automobiles where engineering, performance, and design meet. Explore our curated collection of luxury vehicles from Porsche, Mercedes-Benz, BMW, Ferrari, Lamborghini, and more.',
+    'Eleven exceptional cars. One showroom. A quiet, curated collection of luxury and performance vehicles.',
   openGraph: {
-    title: 'Beyond the Ordinary — Premium Automotive Showroom',
-    description:
-      'Discover an exceptional collection of automobiles where engineering, performance, and design meet.',
+    title: 'The art of arrival — Velocity Showroom',
+    description: 'Eleven exceptional cars. One showroom.',
     type: 'website',
     images: [
       {
@@ -25,12 +32,14 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <Hero
-      eyebrow="THE ART OF AUTOMOTIVE EXCELLENCE"
-      headline="BEYOND THE ORDINARY."
-      supportText="Discover an exceptional collection of automobiles, where engineering, performance, and design meet."
-      primaryCta="EXPLORE COLLECTION"
-      secondaryCta="DISCOVER OUR SHOWROOM"
-    />
+    <>
+      <IntroOverlay />
+      <Hero />
+      <ShowroomSection />
+      <DetailSection />
+      <IvorySection />
+      <NumberedCards />
+      <FooterCloser />
+    </>
   )
 }

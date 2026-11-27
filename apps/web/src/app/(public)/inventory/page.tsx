@@ -104,7 +104,10 @@ export default async function InventoryPage({ searchParams }: InventoryPageProps
         <main className="flex-grow">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-              <h1 className="font-display text-3xl font-bold text-primaryText">
+              <p className="text-[0.68rem] font-manrope uppercase tracking-[0.32em] text-accentChampagne">
+                The collection
+              </p>
+              <h1 className="mt-2 font-display text-3xl font-normal italic text-primaryText md:text-4xl">
                 Inventory
               </h1>
               <p className="text-secondaryText font-manrope">

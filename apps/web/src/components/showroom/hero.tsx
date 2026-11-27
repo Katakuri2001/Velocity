@@ -1,99 +1,94 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { BlurText } from './blur-text'
-import { FadeContent } from './fade-content'
-import { Magnet } from './magnet'
+import { CinematicReveal } from './cinematic-reveal'
 
-export interface HeroProps {
-  eyebrow?: string
-  headline: string
-  supportText?: string
-  primaryCta: string
-  secondaryCta: string
-}
+const SF90_IMAGE = 'https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/ferrari/ferrari-sf90/primary.png'
 
-export function Hero({ eyebrow, headline, supportText, primaryCta, secondaryCta }: HeroProps) {
+/**
+ * Gold-lit tunnel hero: dark stage, thin gold light strips at both edges,
+ * one front-on car centred, italic serif headline. No video, no carousel.
+ */
+export function Hero() {
   return (
-    <section className="page-container grid items-center gap-10 py-10 md:py-16 lg:grid-cols-12 lg:gap-14 lg:py-24">
-      <div className="lg:col-span-6">
-        {eyebrow && (
-          <FadeContent>
-            <p className="mb-5 text-[0.7rem] font-manrope uppercase tracking-[0.32em] text-accentChampagne">
-              {eyebrow}
+    <section className="relative overflow-hidden bg-[#050505]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_18%,rgba(201,168,106,0.20),transparent_58%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 w-36 bg-[linear-gradient(to_right,rgba(201,168,106,0.30),rgba(201,168,106,0.06)_55%,transparent)] sm:w-56"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 w-36 bg-[linear-gradient(to_left,rgba(201,168,106,0.30),rgba(201,168,106,0.06)_55%,transparent)] sm:w-56"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 hidden w-32 opacity-90 sm:block"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(to right, rgba(201,168,106,0.55) 0px, rgba(201,168,106,0.55) 1px, transparent 1px, transparent 18px)',
+          maskImage: 'linear-gradient(to right, black, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, black, transparent)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-32 opacity-90 sm:block"
+        style={{
+          backgroundImage:
+            'repeating-linear-gradient(to right, rgba(201,168,106,0.55) 0px, rgba(201,168,106,0.55) 1px, transparent 1px, transparent 18px)',
+          maskImage: 'linear-gradient(to left, black, transparent)',
+          WebkitMaskImage: 'linear-gradient(to left, black, transparent)',
+        }}
+      />
+
+      <div className="relative px-5 pb-16 pt-24 sm:px-8 md:pb-24 md:pt-28">
+        <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
+          <CinematicReveal>
+            <p className="text-[0.68rem] font-manrope uppercase tracking-[0.34em] text-[#a98f5c] sm:text-xs">
+              The showroom
             </p>
-          </FadeContent>
-        )}
+          </CinematicReveal>
 
-        <BlurText
-          text={headline}
-          className="block max-w-xl font-display text-[clamp(2.6rem,7vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.04em] text-primaryText"
-        />
+          <CinematicReveal delay={0.12}>
+            <h1 className="mt-5 font-display text-[clamp(3rem,10vw,7rem)] font-normal italic leading-[0.95] text-[#f2efe9]">
+              Step inside.
+            </h1>
+          </CinematicReveal>
 
-        {supportText && (
-          <FadeContent delay={0.15} className="mt-6 max-w-lg">
-            <p className="text-base leading-relaxed text-secondaryText font-manrope sm:text-lg">
-              {supportText}
+          <CinematicReveal delay={0.24}>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-[#d4d4d8] sm:text-lg">
+              Eleven exceptional cars. One showroom.
             </p>
-          </FadeContent>
-        )}
+          </CinematicReveal>
 
-        <FadeContent delay={0.25} className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
-          <Magnet>
+          <CinematicReveal delay={0.36}>
             <Link
               href="/inventory"
-              className="focus-ring inline-flex w-full items-center justify-center rounded-xl bg-accentChampagne px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-[#241a0c] transition-colors hover:bg-[#e8cfa5] sm:w-auto"
+              className="focus-ring mt-8 inline-flex items-center justify-center rounded-full border border-[rgba(201,168,106,0.5)] px-7 py-3 text-xs font-manrope uppercase tracking-[0.18em] text-[#e7dcc4] transition-colors hover:border-[#c9a86a] hover:text-[#f7f2e7]"
             >
-              {primaryCta}
+              Explore collection
             </Link>
-          </Magnet>
-          <Magnet strength={0.16}>
-            <Link
-              href="/contact"
-              className="focus-ring inline-flex w-full items-center justify-center rounded-xl border border-glassBorder px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-primaryText transition-colors hover:bg-white/5 sm:w-auto"
-            >
-              {secondaryCta}
-            </Link>
-          </Magnet>
-        </FadeContent>
+          </CinematicReveal>
 
-        <FadeContent delay={0.35} className="mt-10 flex items-center gap-3 text-xs font-manrope text-secondaryText">
-          <span className="h-px w-8 bg-accentChampagne/60" />
-          <span>Curated performance · Private collection</span>
-        </FadeContent>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative lg:col-span-6"
-      >
-        <div className="relative h-[300px] overflow-hidden rounded-2xl border border-glassBorder bg-secondaryBg shadow-pavilion sm:h-[420px] lg:h-[560px]">
-          <Image
-            src="/images/hero/hero-candidate-1.jpg"
-            alt="Cinematic sports car hero"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-primaryBg/85 via-primaryBg/10 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
-            <div>
-              <p className="text-[0.65rem] font-manrope uppercase tracking-[0.28em] text-accentChampagne">
-                Featured
-              </p>
-              <p className="mt-1 font-display text-xl text-primaryText sm:text-2xl">The art of the drive</p>
+          <CinematicReveal delay={0.48} className="mt-10 w-full">
+            <div className="relative mx-auto w-full max-w-3xl">
+              <img
+                src={SF90_IMAGE}
+                alt="Ferrari SF90, front view"
+                width={1024}
+                height={1024}
+                className="mx-auto block h-auto w-full object-contain"
+                loading="eager"
+                decoding="async"
+              />
             </div>
-            <span className="hidden rounded-full border border-glassBorder px-3 py-1 text-[0.65rem] uppercase tracking-widest text-secondaryText sm:block">
-              01 / 04
-            </span>
-          </div>
+          </CinematicReveal>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

@@ -8,20 +8,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primaryBg: '#0B0C0E',
-        secondaryBg: '#121315',
+        primaryBg: '#050505',
+        secondaryBg: '#0b0b0c',
         elevatedSurface: 'rgba(255, 255, 255, 0.04)',
-        glassBorder: 'rgba(216, 185, 138, 0.18)',
-        primaryText: '#ECE9E4',
+        glassBorder: 'rgba(201, 168, 106, 0.18)',
+        primaryText: '#F2EFE9',
         secondaryText: '#A6A39C',
-        accentChampagne: '#D8B98A',
+        accentChampagne: '#c9a86a',
         accentElectricBlue: '#98BFFF',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
         manrope: ['var(--font-manrope)', 'sans-serif'],
         space: ['var(--font-space-grotesk)', 'monospace'],
-        display: ['var(--font-display)', 'serif'],
+        display: ['var(--font-playfair)', 'Playfair Display', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

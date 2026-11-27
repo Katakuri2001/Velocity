@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useSession } from '@/components/auth/session-provider'
 import { GlassPanel } from '@/components/ui/glass-panel'
 import { Menu, X } from 'lucide-react'
+import { VoiceToggle } from './voice-toggle'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -54,6 +55,7 @@ export function Navbar() {
             </nav>
 
             <div className="hidden items-center gap-2 lg:flex">
+              <VoiceToggle />
               {session ? (
                 <>
                   <span className="max-w-40 truncate text-xs text-secondaryText">{session.user.email}</span>
@@ -115,7 +117,10 @@ export function Navbar() {
                       {link.label}
                     </Link>
                   ))}
-                  <div className="mt-3 grid grid-cols-2 gap-2 border-t border-glassBorder pt-4">
+                  <div className="mt-3 flex items-center gap-2 border-t border-glassBorder pt-4">
+                    <VoiceToggle />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
                     {session ? (
                       <button className="focus-ring col-span-2 rounded-lg border border-glassBorder px-4 py-3 text-sm text-secondaryText">
                         Sign out

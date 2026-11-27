@@ -71,7 +71,7 @@ export function TestDriveForm({ vehicleId }: TestDriveFormProps) {
   if (submitted) {
     return (
       <div className="glass-panel rounded-xl p-6 border glass-border text-center">
-        <div className="w-12 h-12 rounded-full bg-accent-electric-blue text-primaryBg flex items-center justify-center mx-auto mb-4">
+        <div className="w-12 h-12 rounded-full bg-accent-champagne text-primaryBg flex items-center justify-center mx-auto mb-4">
           <span className="text-2xl">✓</span>
         </div>
         <h3 className="font-display text-xl font-bold text-primaryText mb-2">
@@ -102,7 +102,7 @@ export function TestDriveForm({ vehicleId }: TestDriveFormProps) {
         </label>
         <input
           type="text"
-          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+          className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-champagne"
           value={formData.name}
           onChange={(e) => handleChange('name', e.target.value)}
           placeholder="John Doe"
@@ -115,7 +115,7 @@ export function TestDriveForm({ vehicleId }: TestDriveFormProps) {
           </label>
           <input
             type="tel"
-            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-champagne"
             value={formData.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
             placeholder="+1 234 567 8900"
@@ -127,7 +127,7 @@ export function TestDriveForm({ vehicleId }: TestDriveFormProps) {
           </label>
           <input
             type="email"
-            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-champagne"
             value={formData.email}
             onChange={(e) => handleChange('email', e.target.value)}
             placeholder="john@example.com"
@@ -141,7 +141,7 @@ export function TestDriveForm({ vehicleId }: TestDriveFormProps) {
           </label>
           <input
             type="date"
-            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-champagne"
             value={formData.preferredDate}
             onChange={(e) => handleChange('preferredDate', e.target.value)}
             min={minDate}
@@ -153,7 +153,7 @@ export function TestDriveForm({ vehicleId }: TestDriveFormProps) {
           </label>
           <input
             type="time"
-            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-electric-blue"
+            className="w-full px-3 py-2 rounded-md bg-white/5 border glass-border text-sm text-primaryText focus:outline-none focus:border-accent-champagne"
             value={formData.preferredTime}
             onChange={(e) => handleChange('preferredTime', e.target.value)}
           />
@@ -162,7 +162,7 @@ export function TestDriveForm({ vehicleId }: TestDriveFormProps) {
       <Button
         type="submit"
         size="lg"
-        className="w-full bg-accent-electric-blue text-primaryBg hover:bg-accent-champagne disabled:opacity-50"
+        className="w-full bg-accent-champagne text-primaryBg hover:bg-accent-champagne disabled:opacity-50"
         disabled={submitting}
       >
         {submitting ? 'Sending...' : 'Request test drive'}

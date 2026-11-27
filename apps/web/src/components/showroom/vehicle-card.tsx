@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
 import { ImageOptimizer } from '@/components/showroom/image-optimizer'
+import { manufacturerName } from '@/lib/manufacturer'
 import type { Vehicle } from '@/types/database'
 
 export interface VehicleCardProps {
@@ -13,7 +14,7 @@ export interface VehicleCardProps {
 const PRICE_MISSING = 'To be confirmed'
 
 export function VehicleCard({ vehicle, showActions = true }: VehicleCardProps) {
-  const make = vehicle.manufacturer_id || 'Unknown'
+  const make = manufacturerName(vehicle.manufacturer_id)
 
   return (
     <article className="group h-full">

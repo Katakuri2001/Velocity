@@ -1,83 +1,60 @@
 'use client'
 
+import * as React from 'react'
 import Link from 'next/link'
 import { CinematicReveal } from './cinematic-reveal'
 
-const SF90_IMAGE = 'https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/ferrari/ferrari-sf90/primary.png'
+const R2_CAR =
+  'https://pub-8c38cfe6583241abbd047c611c9137dc.r2.dev/vehicles/ferrari/ferrari-sf90/primary.png'
+const LOCAL_CAR = '/images/previewcars/ferrari-sf90.jpg'
 
 /**
- * Gold-lit tunnel hero: dark stage, thin gold light strips at both edges,
- * one front-on car centred, italic serif headline. No video, no carousel.
+ * Noir editorial hero: one front-on car, thin gold light strips, one headline.
+ * No video, no carousel, no gradients, no cropped car.
  */
 export function Hero() {
+  const [carSrc, setCarSrc] = React.useState(R2_CAR)
+
   return (
     <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[#050505]">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_18%,rgba(201,168,106,0.20),transparent_58%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 w-36 bg-[linear-gradient(to_right,rgba(201,168,106,0.30),rgba(201,168,106,0.06)_55%,transparent)] sm:w-56"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 w-36 bg-[linear-gradient(to_left,rgba(201,168,106,0.30),rgba(201,168,106,0.06)_55%,transparent)] sm:w-56"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 hidden w-32 opacity-90 sm:block"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(to right, rgba(201,168,106,0.55) 0px, rgba(201,168,106,0.55) 1px, transparent 1px, transparent 18px)',
-          maskImage: 'linear-gradient(to right, black, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, black, transparent)',
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-32 opacity-90 sm:block"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(to right, rgba(201,168,106,0.55) 0px, rgba(201,168,106,0.55) 1px, transparent 1px, transparent 18px)',
-          maskImage: 'linear-gradient(to left, black, transparent)',
-          WebkitMaskImage: 'linear-gradient(to left, black, transparent)',
-        }}
-      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-5 w-px bg-[#c9a86a]/30 sm:left-10" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-5 w-px bg-[#c9a86a]/30 sm:right-10" />
+      <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-px w-[70vw] -translate-x-1/2 bg-[#c9a86a]/20" />
 
-      <div className="relative px-5 pb-14 pt-28 sm:px-8 md:pb-16 md:pt-32">
+      <div className="relative px-5 pb-14 pt-28 sm:px-8 md:pb-20 md:pt-32">
         <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
           <CinematicReveal>
-            <p className="text-[0.68rem] font-manrope uppercase tracking-[0.34em] text-[#a98f5c] sm:text-xs">
-              The showroom
+            <p className="text-[0.7rem] font-manrope uppercase tracking-[0.42em] text-[#c9a86a]">
+              The collection
             </p>
           </CinematicReveal>
 
           <CinematicReveal delay={0.08}>
-            <h1 className="mt-5 font-display text-[clamp(3rem,10vw,7rem)] font-normal italic leading-[0.95] text-[#f2efe9]">
-              Step inside.
+            <h1 className="mt-6 font-display text-[clamp(3rem,9.5vw,7rem)] font-normal italic leading-[0.98] text-[#f5f0e8]">
+              The art of arrival.
             </h1>
           </CinematicReveal>
 
           <CinematicReveal delay={0.16}>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-[#d4d4d8] sm:text-lg">
-              Eleven exceptional cars. One showroom.
+            <p className="mt-6 max-w-md text-base leading-relaxed text-[#d4d4d8] sm:text-lg">
+              Eleven cars. One standard.
             </p>
           </CinematicReveal>
 
           <CinematicReveal delay={0.24}>
             <Link
               href="/inventory"
-              className="focus-ring mt-8 inline-flex items-center justify-center rounded-full border border-[rgba(201,168,106,0.5)] px-7 py-3 text-xs font-manrope uppercase tracking-[0.18em] text-[#e7dcc4] transition-colors hover:border-[#c9a86a] hover:text-[#f7f2e7]"
+              className="focus-ring mt-9 inline-flex min-h-[48px] items-center justify-center rounded-full border border-[#c9a86a] px-8 py-3 text-xs font-manrope uppercase tracking-[0.22em] text-[#e7dcc4] transition-colors duration-[400ms] hover:bg-[#c9a86a] hover:text-[#050505]"
             >
               Explore collection
             </Link>
           </CinematicReveal>
 
-          <CinematicReveal delay={0.32} className="mt-10 w-full">
-            <div className="relative mx-auto w-full max-w-3xl">
+          <CinematicReveal delay={0.32} className="mt-12 w-full">
+            <div className="relative mx-auto w-full max-w-4xl">
               <img
-                src={SF90_IMAGE}
+                src={carSrc}
+                onError={() => setCarSrc(LOCAL_CAR)}
                 alt="Ferrari SF90, front view"
                 width={1024}
                 height={1024}
@@ -86,6 +63,9 @@ export function Hero() {
                 decoding="async"
               />
             </div>
+            <p className="mt-5 text-[0.68rem] font-manrope uppercase tracking-[0.34em] text-[#a6a39c]">
+              Ferrari SF90
+            </p>
           </CinematicReveal>
         </div>
       </div>

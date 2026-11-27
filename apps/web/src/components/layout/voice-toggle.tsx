@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { Volume2, VolumeX } from 'lucide-react'
 import { hasSeenIntro, isVoiceMuted, subscribeVoice, toggleVoiceMuted } from '@/lib/voice'
+import { stopIntroMusic } from '@/lib/intro-music'
 
 /**
  * Small speaker toggle in the header. Only appears after the intro has been
@@ -26,10 +27,14 @@ export function VoiceToggle() {
   return (
     <button
       type="button"
-      onClick={toggleVoiceMuted}
+      onClick={() => {
+        const nextMuted = !isVoiceMuted()
+        toggleVoiceMuted()
+        if (nextMuted) stopIntroMusic()
+      }}
       aria-pressed={muted}
-      aria-label={muted ? 'Unmute welcome voice' : 'Mute welcome voice'}
-      title={muted ? 'Unmute welcome voice' : 'Mute welcome voice'}
+      aria-label={muted ? 'Unmute voice and music' : 'Mute voice and music'}
+      title={muted ? 'Unmute voice and music' : 'Mute voice and music'}
       className="focus-ring inline-flex h-9 w-9 items-center justify-center rounded-lg border border-glassBorder text-secondaryText transition-colors hover:text-primaryText"
     >
       {muted ? <VolumeX size={16} aria-hidden="true" /> : <Volume2 size={16} aria-hidden="true" />}

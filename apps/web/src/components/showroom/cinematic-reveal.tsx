@@ -17,12 +17,12 @@ export function CinematicReveal({ children, className = '', delay = 0 }: Cinemat
   const reduceMotion = useReducedMotion()
 
   if (reduceMotion) {
-    return <div className={className}>{children}</div>
+    return <div className={`cinematic-reveal ${className}`}>{children}</div>
   }
 
   return (
     <motion.div
-      className={className}
+      className={`cinematic-reveal ${className}`}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}

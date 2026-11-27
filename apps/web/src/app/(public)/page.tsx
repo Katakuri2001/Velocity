@@ -12,13 +12,12 @@ import type { Metadata } from 'next'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Beyond the Ordinary — Premium Automotive Showroom',
+  title: 'The art of arrival — Velocity Showroom',
   description:
-    'Discover an exceptional collection of automobiles where engineering, performance, and design meet. Explore our curated collection of luxury vehicles from Porsche, Mercedes-Benz, BMW, Ferrari, Lamborghini, and more.',
+    'Eleven exceptional cars. One showroom. A quiet, curated collection of luxury and performance vehicles.',
   openGraph: {
-    title: 'Beyond the Ordinary — Premium Automotive Showroom',
-    description:
-      'Discover an exceptional collection of automobiles where engineering, performance, and design meet.',
+    title: 'The art of arrival — Velocity Showroom',
+    description: 'Eleven exceptional cars. One showroom.',
     type: 'website',
     images: [
       {

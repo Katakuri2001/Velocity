@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { SortControls } from '@/components/inventory/sort-controls'
 import { ViewModeToggle } from '@/components/inventory/view-mode-toggle'
 import { ImageOptimizer } from '@/components/showroom/image-optimizer'
+import { manufacturerName } from '@/lib/manufacturer'
 
 interface InventoryResultsProps {
   vehicles: any[]
@@ -78,12 +79,12 @@ export function InventoryResults({ vehicles, total, sort }: InventoryResultsProp
                   <Link
                     href={`/inventory/${v.slug}`}
                     className="relative block h-[280px] w-full overflow-hidden bg-[#0a0a0a]"
-                    aria-label={`View ${v.manufacturer_id} ${v.model}`}
+                    aria-label={`View ${manufacturerName(v.manufacturer_id)} ${v.model}`}
                   >
                     {v.image_url ? (
                       <ImageOptimizer
                         src={v.image_url}
-                        alt={`${v.manufacturer_id} ${v.model} ${v.year}`}
+                        alt={`${manufacturerName(v.manufacturer_id)} ${v.model} ${v.year}`}
                         fill
                         className="object-contain p-6 transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
                         fit="contain"
@@ -95,7 +96,7 @@ export function InventoryResults({ vehicles, total, sort }: InventoryResultsProp
                   </Link>
                   <div className="flex h-[140px] flex-col p-4">
                     <p className="font-manrope text-[0.65rem] uppercase tracking-[0.24em] text-accentChampagne">
-                      {v.manufacturer_id}
+                      {manufacturerName(v.manufacturer_id)}
                     </p>
                     <h3 className="mt-1 font-display text-lg font-semibold text-primaryText">
                       <Link href={`/inventory/${v.slug}`} className="focus-ring hover:text-accentChampagne">
@@ -126,13 +127,13 @@ export function InventoryResults({ vehicles, total, sort }: InventoryResultsProp
                 key={v.id}
                 href={`/inventory/${v.slug}`}
                 className="group flex items-center gap-4 rounded-xl border border-[#262626] bg-[#141414] p-4 transition-[border-color] duration-[400ms] ease-out hover:border-[rgba(201,168,106,0.4)]"
-                aria-label={`View ${v.manufacturer_id} ${v.model}`}
+                aria-label={`View ${manufacturerName(v.manufacturer_id)} ${v.model}`}
               >
                 <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg bg-[#0a0a0a] sm:h-24 sm:w-36">
                   {v.image_url ? (
                     <ImageOptimizer
                       src={v.image_url}
-                      alt={`${v.manufacturer_id} ${v.model} ${v.year}`}
+                      alt={`${manufacturerName(v.manufacturer_id)} ${v.model} ${v.year}`}
                       fill
                       className="object-contain p-2 transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
                       fit="contain"
@@ -145,7 +146,7 @@ export function InventoryResults({ vehicles, total, sort }: InventoryResultsProp
 
                 <div className="min-w-0 flex-1">
                   <p className="font-manrope text-[0.65rem] uppercase tracking-[0.24em] text-accentChampagne">
-                    {v.manufacturer_id}
+                    {manufacturerName(v.manufacturer_id)}
                   </p>
                   <h3 className="mt-1 truncate font-display text-lg font-semibold text-primaryText">
                     {v.model} {v.variant ? `- ${v.variant}` : ''}

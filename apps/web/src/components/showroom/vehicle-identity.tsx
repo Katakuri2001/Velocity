@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import { manufacturerName } from '@/lib/manufacturer'
 
 interface VehicleIdentityProps {
   vehicle: any
@@ -18,14 +19,14 @@ export function VehicleIdentity({ vehicle }: VehicleIdentityProps) {
     >
       <div className="flex items-center gap-2 mb-2">
         <span className="text-xs font-manrope text-accent-champagne uppercase tracking-wider">
-          {vehicle.manufacturer_id.substring(0, 8)}
+          {manufacturerName(vehicle.manufacturer_id)}
         </span>
         <span className="text-xs font-manrope text-secondaryText">•</span>
         <span className="text-xs font-manrope text-secondaryText">{vehicle.condition}</span>
       </div>
 
       <h1 className="font-display text-3xl font-bold text-primaryText leading-tight">
-        {vehicle.model} {vehicle.variant ? <span className="text-accent-electric-blue">{` - ${vehicle.variant}`}</span> : ''}
+        {vehicle.model} {vehicle.variant ? <span className="text-accent-champagne">{` - ${vehicle.variant}`}</span> : ''}
       </h1>
 
       <div className="flex items-center gap-4 mb-6">
@@ -79,11 +80,11 @@ export function VehicleIdentity({ vehicle }: VehicleIdentityProps) {
       </div>
 
       <div className="pt-4 border-t glass-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex gap-2">
-          <Button size="lg" className="w-full sm:w-auto bg-accent-electric-blue text-primaryBg hover:bg-accent-champagne">
+        <div className="flex flex-wrap gap-2">
+          <Button size="lg" className="w-full sm:w-auto sm:whitespace-nowrap border border-[#c9a86a] bg-transparent text-[#e7dcc4] hover:bg-[#c9a86a] hover:text-[#050505]">
             Enquire about this vehicle
           </Button>
-          <Button size="lg" variant="outline" className="w-full sm:w-auto">
+          <Button size="lg" variant="outline" className="w-full sm:w-auto sm:whitespace-nowrap">
             Book a test drive
           </Button>
         </div>
